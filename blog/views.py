@@ -45,3 +45,8 @@ def post_new(request):
     else:
         form = PostForm()
     return render(request, 'post_edit.html', {'form': form})
+
+def upload(request):
+    form = PostForm()
+    return render(request, 'upload.html', {'form': form})
+

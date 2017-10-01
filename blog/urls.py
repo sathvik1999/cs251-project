@@ -8,4 +8,5 @@ urlpatterns = [
     url(r'^signup/$', entry_views.signup, name='signup'),
     url(r'^post/(?P<pk>\d+)/$', entry_views.post_detail, name='post_detail'),
     url(r'^post/new/$', entry_views.post_new, name='post_new'),
+    url(r'^login/upload/$',entry_views.upload,name='upload'),
 ]
