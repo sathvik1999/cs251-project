@@ -2,14 +2,14 @@ from django.utils import timezone
 from .models import Post
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login , authenticate
-from .forms import SignUpForm,HomeForm,PostForm
+from .forms import SignUpForm,PostForm,InterestForm
 from django.shortcuts import redirect, render, get_object_or_404
 
 
 @login_required
 def home(request):
-    form=HomeForm()
-    return render(request, 'home.html', {'form': form})
+    posts = Post.objects.order_by('published_date')
+    return render(request, 'home.html',{'posts': posts})
 
 def signup(request):
     if request.method == 'POST':
@@ -47,6 +47,27 @@ def post_new(request):
     return render(request, 'post_edit.html', {'form': form})
 
 def upload(request):
-    form = PostForm()
+    if request.method == "POST":
+        form = PostForm(request.POST)
+        if form.is_valid():
+            post = form.save(commit=False)
+            post.uploader = request.user
+            post.published_date = timezone.now()
+            post.save()
+            return redirect('home')
+    else:
+        form = PostForm()
     return render(request, 'upload.html', {'form': form})
+
+def interests(request):
+    if request.method == "POST":
+        form = InterestForm(request.POST)
+        if form.is_valid():
+            post = form.save(commit=False)
+            post.title = request.user
+            post.save()
+            return redirect('home')
+    else:
+        form = InterestForm()
+    return render(request, 'interests.html', {'form': form})
 

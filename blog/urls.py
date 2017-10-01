@@ -9,4 +9,5 @@ urlpatterns = [
     url(r'^post/(?P<pk>\d+)/$', entry_views.post_detail, name='post_detail'),
     url(r'^post/new/$', entry_views.post_new, name='post_new'),
     url(r'^login/upload/$',entry_views.upload,name='upload'),
+    url(r'^login/interests/$',entry_views.interests,name='interests'),
 ]

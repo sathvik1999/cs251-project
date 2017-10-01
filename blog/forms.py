@@ -1,13 +1,13 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
-from .models import Post
+from .models import Post,Interest
 
 class PostForm(forms.ModelForm):
 
     class Meta:
         model = Post
-        fields = ('title','author','text')
+        fields = ('title','author','text','genre')
 
 
 class SignUpForm(UserCreationForm):
@@ -19,7 +19,12 @@ class SignUpForm(UserCreationForm):
         model = User
         fields = ('username', 'first_name', 'last_name', 'email', 'password1', 'password2', )
 
-class HomeForm(UserCreationForm):
+class InterestForm(forms.ModelForm):
+	options=(
+		("fiction","fiction"),
+		("fear","fear"),)
+	Interests=forms.MultipleChoiceField(widget=forms.CheckboxSelectMultiple,choices=options)
+	
 	class Meta:
-		model = User
-		fields = ('username','password1','password2')
+		model=Interest
+		fields = ('Interests',)
