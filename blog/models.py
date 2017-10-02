@@ -29,4 +29,9 @@ class Post(models.Model):
         return self.title
 
 class Interest(models.Model):
-    text=models.TextField(default="")
+    user=models.ForeignKey('auth.User',default=1)
+    genre = models.CharField(max_length=200,default='')
+    published_date = models.DateTimeField(
+            blank=True, null=True)
+    
+    

@@ -1,5 +1,5 @@
 from django.utils import timezone
-from .models import Post
+from .models import Post,Interest
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login , authenticate
 from .forms import SignUpForm,PostForm,InterestForm
@@ -9,7 +9,8 @@ from django.shortcuts import redirect, render, get_object_or_404
 @login_required
 def home(request):
     posts = Post.objects.order_by('published_date')
-    return render(request, 'home.html',{'posts': posts})
+    posts1 = Interest.objects.filter(user=request.user).order_by('-published_date')
+    return render(request, 'home.html',{'posts': posts,'posts1':posts1})
 
 def signup(request):
     if request.method == 'POST':
@@ -64,7 +65,9 @@ def interests(request):
         form = InterestForm(request.POST)
         if form.is_valid():
             post = form.save(commit=False)
-            post.title = request.user
+            post.user = request.user
+            post.genre= form.cleaned_data['Interests']
+            post.published_date =timezone.now()
             post.save()
             return redirect('home')
     else:

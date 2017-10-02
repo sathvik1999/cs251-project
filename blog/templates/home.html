@@ -11,5 +11,10 @@
         <p>genre: {{ post.genre }}</p>
     </div>
 {% endfor %}
+{% for post in posts1|slice:":1" %}
+    <div>
+        <p>genre: {{ post.genre }}</p>
+    </div>
+{% endfor %}
 
 {% endblock %}
