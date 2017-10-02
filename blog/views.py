@@ -1,16 +1,17 @@
 from django.utils import timezone
-from .models import Post,Interest
+from .models import Post,Interest,Document
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login , authenticate
-from .forms import SignUpForm,PostForm,InterestForm
+from .forms import SignUpForm,PostForm,InterestForm,DocumentForm
 from django.shortcuts import redirect, render, get_object_or_404
-
+from django.conf import settings
+from django.core.files.storage import FileSystemStorage
 
 @login_required
 def home(request):
-    posts = Post.objects.order_by('published_date')
+    documents = Document.objects.order_by('published_date')
     posts1 = Interest.objects.filter(user=request.user).order_by('-published_date')
-    return render(request, 'home.html',{'posts': posts,'posts1':posts1})
+    return render(request, 'home.html',{'documents': documents,'posts1':posts1})
 
 def signup(request):
     if request.method == 'POST':
@@ -74,3 +75,23 @@ def interests(request):
         form = InterestForm()
     return render(request, 'interests.html', {'form': form})
 
+def upfile(request):
+    if request.method == 'POST':
+        form = DocumentForm(request.POST, request.FILES)
+        if form.is_valid():
+            post = form.save(commit=False)
+            post.uploader = request.user
+            post.published_date = timezone.now()
+            post.save()
+            return redirect('home')
+    else:
+        form = DocumentForm()
+    return render(request, 'model_form_upload.html', {'form': form})
+
+def openfile(request, file_name):
+    File_Name = file_name.replace('_', ' ')
+    file_path = os.path.join(settings.MEDIA_ROOT, 'QuestionPapers',File_Name)
+    with open(file_path,'r') as pdf:
+        response = HttpResponse(pdf.read(), content_type = 'application/pdf')
+        response['Content-Disposition'] = 'attachment;filename=some_file.pdf'
+    return response

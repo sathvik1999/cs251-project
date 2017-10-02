@@ -1,8 +1,8 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
-from .models import Post,Interest
-
+from .models import Post,Interest,Document
+#from uploads.core.models import Document
 class PostForm(forms.ModelForm):
 
     class Meta:
@@ -28,3 +28,7 @@ class InterestForm(forms.ModelForm):
 	class Meta:
 		model=Interest
 		fields = ('Interests',)
+class DocumentForm(forms.ModelForm):
+    class Meta:
+        model = Document
+        fields = ('title','author','genre','description', 'document', 'image',)

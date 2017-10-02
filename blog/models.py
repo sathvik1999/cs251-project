@@ -35,3 +35,19 @@ class Interest(models.Model):
             blank=True, null=True)
     
     
+class Document(models.Model):
+    fiction='fi'
+    fear='fe'
+    genre_choices=((fiction,'fiction'),(fear,'fear'))
+
+    uploader = models.ForeignKey('auth.User',default=1)
+    title = models.CharField(max_length=200,default='')
+    author = models.CharField(max_length=200,default="")
+    genre = models.CharField(
+        max_length=2,
+        choices=genre_choices,
+        default=fiction,)
+    description = models.CharField(max_length=255, blank=True)
+    document = models.FileField(upload_to='documents/')
+    image = models.ImageField(upload_to='images/',default = 'pic_folder/None/no-img.jpg')
+    published_date = models.DateTimeField(auto_now_add=True)

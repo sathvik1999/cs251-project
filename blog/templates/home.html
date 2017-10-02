@@ -3,14 +3,17 @@
 {% block content %}
   <h2>Welcome, {{ user.get_full_name }} !</h2>
   <p>Your email address: {{ user.email }}</p>
-  <a href="{% url 'upload' %}">Upload</a>
   <a href="{% url 'interests' %}">Interests</a>
-{% for post in posts %}
+  <a href="{% url 'upfile' %}">upfile</a>
+<h2>your uploads</h2>
+{% for object in documents %}
     <div>
-        <p>title: {{ post.title }}</p>
-        <p>genre: {{ post.genre }}</p>
+        <p>genre: {{ object.genre }}</p>
+        <p>book: <a href="{{object.document.url}}">{{ object.title }}</a>
+        <img src="{{object.image.url}}" alt="" style="width:304px;height:228px;">
     </div>
 {% endfor %}
+<h2>your interests</h2>
 {% for post in posts1|slice:":1" %}
     <div>
         <p>genre: {{ post.genre }}</p>
