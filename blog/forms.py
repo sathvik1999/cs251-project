@@ -1,13 +1,8 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
-from .models import Post,Interest,Document
+from .models import Interest,Document
 #from uploads.core.models import Document
-class PostForm(forms.ModelForm):
-
-    class Meta:
-        model = Post
-        fields = ('title','author','text','genre')
 
 
 class SignUpForm(UserCreationForm):
@@ -20,14 +15,17 @@ class SignUpForm(UserCreationForm):
         fields = ('username', 'first_name', 'last_name', 'email', 'password1', 'password2', )
 
 class InterestForm(forms.ModelForm):
-	options=(
-		("fiction","fiction"),
-		("fear","fear"),)
-	Interests=forms.MultipleChoiceField(widget=forms.CheckboxSelectMultiple,choices=options)
+	#options=(
+	#	("fiction","fiction"),
+	#	("fear","fear"),
+	#	("fear1","fear1"),
+	#	("fear2","fear2"),
+	#	("fear3","fear3"),)
+	#Interests=forms.MultipleChoiceField(widget=forms.CheckboxSelectMultiple,choices=options)
 	
 	class Meta:
 		model=Interest
-		fields = ('Interests',)
+		fields = ('my_field',)
 class DocumentForm(forms.ModelForm):
     class Meta:
         model = Document

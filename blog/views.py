@@ -1,17 +1,20 @@
 from django.utils import timezone
-from .models import Post,Interest,Document
+from .models import Interest,Document
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login , authenticate
-from .forms import SignUpForm,PostForm,InterestForm,DocumentForm
+from .forms import SignUpForm,InterestForm,DocumentForm
 from django.shortcuts import redirect, render, get_object_or_404
 from django.conf import settings
 from django.core.files.storage import FileSystemStorage
+from .filters import DocumentFilter
 
 @login_required
 def home(request):
-    documents = Document.objects.order_by('published_date')
-    posts1 = Interest.objects.filter(user=request.user).order_by('-published_date')
-    return render(request, 'home.html',{'documents': documents,'posts1':posts1})
+    documents = Document.objects.order_by('published_date').filter(user=request.user)
+    interest = Interest.objects.filter(user=request.user).order_by('-published_date').first()
+    doc=Document.objects.order_by('published_date').filter(genre__in=interest.my_field)
+    #interest=Interest.objects.all().first()
+    return render(request, 'home.html',{'documents': documents,'interest':interest,'doc':doc})
 
 def signup(request):
     if request.method == 'POST':
@@ -27,33 +30,12 @@ def signup(request):
         form = SignUpForm()
     return render(request, 'signup.html', {'form': form})
 
-
-def post_list(request):
-    posts = Post.objects.order_by('published_date')
-    return render(request, 'post_list.html', {'posts': posts})
-
-def post_detail(request, pk):
-    post = get_object_or_404(Post, pk=pk)
-    return render(request, 'post_detail.html', {'post': post})
-def post_new(request):
-    if request.method == "POST":
-        form = PostForm(request.POST)
-        if form.is_valid():
-            post = form.save(commit=False)
-            post.author = request.user
-            post.published_date = timezone.now()
-            post.save()
-            return redirect('post_detail', pk=post.pk)
-    else:
-        form = PostForm()
-    return render(request, 'post_edit.html', {'form': form})
-
 def upload(request):
     if request.method == "POST":
         form = PostForm(request.POST)
         if form.is_valid():
             post = form.save(commit=False)
-            post.uploader = request.user
+            post.user = request.user
             post.published_date = timezone.now()
             post.save()
             return redirect('home')
@@ -67,7 +49,7 @@ def interests(request):
         if form.is_valid():
             post = form.save(commit=False)
             post.user = request.user
-            post.genre= form.cleaned_data['Interests']
+            #post.genre= form.cleaned_data['Interests']
             post.published_date =timezone.now()
             post.save()
             return redirect('home')
@@ -80,7 +62,7 @@ def upfile(request):
         form = DocumentForm(request.POST, request.FILES)
         if form.is_valid():
             post = form.save(commit=False)
-            post.uploader = request.user
+            post.user = request.user
             post.published_date = timezone.now()
             post.save()
             return redirect('home')
@@ -88,10 +70,8 @@ def upfile(request):
         form = DocumentForm()
     return render(request, 'model_form_upload.html', {'form': form})
 
-def openfile(request, file_name):
-    File_Name = file_name.replace('_', ' ')
-    file_path = os.path.join(settings.MEDIA_ROOT, 'QuestionPapers',File_Name)
-    with open(file_path,'r') as pdf:
-        response = HttpResponse(pdf.read(), content_type = 'application/pdf')
-        response['Content-Disposition'] = 'attachment;filename=some_file.pdf'
-    return response
+def search(request):
+    Document_list = Document.objects.all()
+    Document_filter = DocumentFilter(request.GET, queryset=Document_list)
+    return render(request, 'search.html', {'filter': Document_filter})
+

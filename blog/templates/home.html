@@ -5,6 +5,7 @@
   <p>Your email address: {{ user.email }}</p>
   <a href="{% url 'interests' %}">Interests</a>
   <a href="{% url 'upfile' %}">upfile</a>
+  <a href="{% url 'search' %}">search</a>
 <h2>your uploads</h2>
 {% for object in documents %}
     <div>
@@ -14,10 +15,11 @@
     </div>
 {% endfor %}
 <h2>your interests</h2>
-{% for post in posts1|slice:":1" %}
+    {{interest.my_field}}
+<h2>suggestions</h2>
+{% for d in doc %}
     <div>
-        <p>genre: {{ post.genre }}</p>
+        <p>title: {{ d.title }}</p>
     </div>
 {% endfor %}
-
 {% endblock %}
