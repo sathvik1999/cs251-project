@@ -11,7 +11,8 @@ urlpatterns = [
     url(r'^login/interests/$',entry_views.interests,name='interests'),
     url(r'^login/upfile/$',entry_views.upfile,name='upfile'),
     url(r'^login/search/$', entry_views.search, name='search'),
- 	url(r'^login/delete/(?P<pk>\d+)/$', entry_views.delete1, name='delete'),    
+ 	url(r'^login/delete/(?P<pk>\d+)/$', entry_views.delete1, name='delete'),
+ 	url(r'^login/bookpage/(?P<pk>\d+)/$', entry_views.bookpage, name='bookpage'),    
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

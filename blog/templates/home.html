@@ -9,18 +9,24 @@
 <h2>your uploads</h2>
 {% for object in documents %}
     <div>
-        <p>genre: {{ object.genre }}</p>
-        <p>book: <a href="{{object.document.url}}">{{ object.title }}</a>
+        <p>
+        <img src="{{object.image.url}}" alt="" style="width:100px;height:100px;">
+        genre: {{ object.genre }}
+        title: <a href="{% url 'bookpage' pk=object.pk %}">{{ object.title }}</a>
         <a href="{% url 'delete' pk=object.pk %}">delete</a>
-        <img src="{{object.image.url}}" alt="" style="width:304px;height:228px;">
+        </p>
     </div>
 {% endfor %}
 <h2>your interests</h2>
     {{interest.my_field}}
 <h2>suggestions</h2>
-{% for d in doc %}
+{% for object in doc %}
     <div>
-        <p>title: {{ d.title }}</p>
+        <p>
+        <img src="{{object.image.url}}" alt="" style="width:100px;height:100px;">
+        genre: {{ object.genre }}
+        title: <a href="{% url 'bookpage' pk=object.pk %}">{{ object.title }}</a>
+        </p>
     </div>
 {% endfor %}
 {% endblock %}

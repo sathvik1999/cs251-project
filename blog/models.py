@@ -25,3 +25,9 @@ class Document(models.Model):
     document = models.FileField(upload_to='documents/')
     image = models.ImageField(upload_to='images/',default = 'pic_folder/None/no-img.jpg')
     published_date = models.DateTimeField(auto_now_add=True)
+
+class Rate(models.Model):
+    user=models.ForeignKey('auth.User',default=1)
+    doc=models.ForeignKey(Document)
+    rating = models.IntegerField(choices=((1,1),(2,2),(3,3),(4,4),(5,5)),default=1)
+    published_date = models.DateTimeField(blank=True, null=True)                                    

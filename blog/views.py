@@ -1,8 +1,8 @@
 from django.utils import timezone
-from .models import Interest,Document
+from .models import Interest,Document,Rate
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login , authenticate
-from .forms import SignUpForm,InterestForm,DocumentForm
+from .forms import SignUpForm,InterestForm,DocumentForm,RatingForm
 from django.shortcuts import redirect, render, get_object_or_404
 from django.conf import settings
 from django.core.files.storage import FileSystemStorage
@@ -80,3 +80,33 @@ def delete1(request, pk):
     doc = get_object_or_404(Document, pk=pk)
     doc.delete()
     return redirect('home')
+
+def bookpage(request, pk):
+    doc = get_object_or_404(Document, pk=pk)
+            
+    if request.method == "POST":
+        form = RatingForm(request.POST)
+        if form.is_valid():
+            r = Rate.objects.filter(doc=doc,user=request.user)
+            if not r:
+                r=Rate.objects.create(user=request.user, doc=doc, rating=form.cleaned_data.get('rating',None))
+            r=Rate.objects.get(doc=doc,user=request.user)
+            r.rating=form.cleaned_data.get('rating',None)
+            tr=list(Rate.objects.filter(doc=doc).values_list('rating',flat=True))
+            if tr!=[]:
+                r1=float(sum(tr))/float(len(tr))
+                t=len(tr)
+            else:
+                r1=0
+                t=0
+            return render(request,'bookpage.html',{'doc':doc,'form':form,'r':r,'r1':round(r1,2),'t':t})
+    else:
+        form = RatingForm()
+        tr=list(Rate.objects.filter(doc=doc).values_list('rating',flat=True))
+        if tr!=[]:
+            r1=float(sum(tr))/float(len(tr))
+            t=len(tr)
+        else:
+            r1=0
+            t=0  
+    return render(request,'bookpage.html',{'doc':doc,'form':form,'r1':round(r1,2),'t':t})
