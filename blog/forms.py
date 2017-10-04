@@ -15,13 +15,6 @@ class SignUpForm(UserCreationForm):
         fields = ('username', 'first_name', 'last_name', 'email', 'password1', 'password2', )
 
 class InterestForm(forms.ModelForm):
-	#options=(
-	#	("fiction","fiction"),
-	#	("fear","fear"),
-	#	("fear1","fear1"),
-	#	("fear2","fear2"),
-	#	("fear3","fear3"),)
-	#Interests=forms.MultipleChoiceField(widget=forms.CheckboxSelectMultiple,choices=options)
 	
 	class Meta:
 		model=Interest

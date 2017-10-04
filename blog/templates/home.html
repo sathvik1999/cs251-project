@@ -11,6 +11,7 @@
     <div>
         <p>genre: {{ object.genre }}</p>
         <p>book: <a href="{{object.document.url}}">{{ object.title }}</a>
+        <a href="{% url 'delete' pk=object.pk %}">delete</a>
         <img src="{{object.image.url}}" alt="" style="width:304px;height:228px;">
     </div>
 {% endfor %}

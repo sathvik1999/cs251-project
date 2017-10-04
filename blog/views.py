@@ -13,7 +13,6 @@ def home(request):
     documents = Document.objects.order_by('published_date').filter(user=request.user)
     interest = Interest.objects.filter(user=request.user).order_by('-published_date').first()
     doc=Document.objects.order_by('published_date').filter(genre__in=interest.my_field)
-    #interest=Interest.objects.all().first()
     return render(request, 'home.html',{'documents': documents,'interest':interest,'doc':doc})
 
 def signup(request):
@@ -25,6 +24,7 @@ def signup(request):
             raw_password = form.cleaned_data.get('password1')
             user = authenticate(username=username, password=raw_password)
             login(request, user)
+            Interest.objects.create(user=user,my_field=['fiction'])
             return redirect('home')
     else:
         form = SignUpForm()
@@ -73,5 +73,10 @@ def upfile(request):
 def search(request):
     Document_list = Document.objects.all()
     Document_filter = DocumentFilter(request.GET, queryset=Document_list)
-    return render(request, 'search.html', {'filter': Document_filter})
+    le=Document_list.count()
+    return render(request, 'search.html', {'filter': Document_filter,'le':le})
 
+def delete1(request, pk):
+    doc = get_object_or_404(Document, pk=pk)
+    doc.delete()
+    return redirect('home')

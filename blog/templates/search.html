@@ -5,9 +5,15 @@
     {{ filter.form.as_p }}
     <button type="submit">Search</button>
   </form>
-  <ul>
-  {% for doc in filter.qs %}
-    <li>{{ doc.title }} - {{ doc.genre }} , {{doc.author}}</li>
-  {% endfor %}
-  </ul>
+{% if filter.qs.count == le %}
+    not yet searched
+{% elif filter.qs.count == 0 %}
+	no searches found
+{% else %}
+    <ul>
+  	{% for doc in filter.qs %}
+    	<li>{{ doc.title }} - {{ doc.genre }} , {{doc.author}}</li>
+  	{% endfor %}
+  	</ul>
+{% endif %}
 {% endblock %}

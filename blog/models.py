@@ -6,7 +6,6 @@ from multiselectfield import MultiSelectField
 
 class Interest(models.Model):
     user=models.ForeignKey('auth.User',default=1)
-    genre = models.CharField(max_length=200,default='')
     my_field = MultiSelectField(choices=(('fiction','fiction'),('fear','fear'),("fear1","fear1"),("fear2","fear2"),("fear3","fear3"),),default='fiction')
     published_date = models.DateTimeField(
             blank=True, null=True)
