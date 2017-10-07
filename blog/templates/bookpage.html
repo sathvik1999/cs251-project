@@ -3,9 +3,11 @@
 {% block content %}
   <div>
         <p>
-        <img src="{{doc.image.url}}" alt="" style="width:100px;height:100px;">
-        genre: {{ doc.genre }}
-        title: {{ doc.title }}</a>
+        <img src="{{doc.image.url}}" alt="" style="width:100px;height:100px;"><br>
+          author: <a href="{% url 'author' pk=doc.author %}">{{doc.author}}</a><br>
+          genre: <a href="{% url 'genre' pk=doc.genre %}">{{doc.genre}}</a><br>
+          title: <a href="{% url 'bookpage' pk=doc.pk %}">{{doc.title }}</a><br>
+          uploader: <a href="{% url 'uploader' pk=doc.uploader %}">{{doc.uploader}}</a>
         </p>
         <a href="{{doc.document.url}}">read</a><br>
         rating: {{r1}}<br> no of ratings {{t}}
@@ -17,4 +19,6 @@
     </form>
 <h2>your rating</h2>
 {{r.rating}}
+<p><a href="{% url 'home' %}">Return to home</a></p>
+
 {% endblock %}

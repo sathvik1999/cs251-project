@@ -3,30 +3,46 @@
 {% block content %}
   <h2>Welcome, {{ user.get_full_name }} !</h2>
   <p>Your email address: {{ user.email }}</p>
-  <a href="{% url 'interests' %}">Interests</a>
-  <a href="{% url 'upfile' %}">upfile</a>
-  <a href="{% url 'search' %}">search</a>
+  <a href="{% url 'reset' %}">reset-password</a><br>
+  <a href="{% url 'interests' %}">Interests</a><br>
+  <a href="{% url 'upfile' %}">upfile</a><br>
+  <a href="{% url 'search' %}">search</a><br>
 <h2>your uploads</h2>
 {% for object in documents %}
     <div>
         <p>
-        <img src="{{object.image.url}}" alt="" style="width:100px;height:100px;">
-        genre: {{ object.genre }}
+        <img src="{{object.image.url}}" alt="" style="width:100px;height:100px;"><br>
+        author: <a href="{% url 'author' pk=object.author %}">{{object.author}}</a><br>
+        genre: <a href="{% url 'genre' pk=object.genre %}">{{object.genre}}</a><br>
         title: <a href="{% url 'bookpage' pk=object.pk %}">{{ object.title }}</a>
-        <a href="{% url 'delete' pk=object.pk %}">delete</a>
+        delete this book : <a href="{% url 'delete' pk=object.pk %}">delete</a>
         </p>
     </div>
 {% endfor %}
 <h2>your interests</h2>
-    {{interest.my_field}}
+{% for i in interest.my_field %}
+    <a href="{% url 'genre' pk=i %}">{{i}}</a>
+        <br>
+{% endfor %}
 <h2>suggestions</h2>
 {% for object in doc %}
-    <div>
-        <p>
-        <img src="{{object.image.url}}" alt="" style="width:100px;height:100px;">
-        genre: {{ object.genre }}
-        title: <a href="{% url 'bookpage' pk=object.pk %}">{{ object.title }}</a>
-        </p>
-    </div>
+    <li>
+        <div>
+          <p>
+          <img src="{{object.image.url}}" alt="" style="width:100px;height:100px;"> <br>
+          author: <a href="{% url 'author' pk=object.author %}">{{object.author}}</a><br>
+          genre: <a href="{% url 'genre' pk=object.genre %}">{{object.genre}}</a> <br>
+          title: <a href="{% url 'bookpage' pk=object.pk %}">{{ object.title }}</a><br>
+          uploader: <a href="{% url 'uploader' pk=object.uploader %}">{{object.uploader}}</a>
+          </p>
+          rating: {{object.rate1}}
+          no of ratings: {{objects.no_ratings}}<br> 
+        </div>
+    </li>
 {% endfor %}
+<h2>Notifications</h2>
+{% for u in fl %}
+    {{ u.get_full_name }}
+{% endfor %}
+
 {% endblock %}

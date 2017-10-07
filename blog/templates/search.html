@@ -1,18 +1,32 @@
 {% extends 'base.html' %}
 
 {% block content %}
-  <form method="get">
+  <form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
     {{ filter.form.as_p }}
     <button type="submit">Search</button>
   </form>
-{% if filter.qs.count == le %}
+{% if le == 0 %}
     not yet searched
 {% elif filter.qs.count == 0 %}
 	no searches found
 {% else %}
     <ul>
   	{% for doc in filter.qs %}
-    	<li>{{ doc.title }} - {{ doc.genre }} , {{doc.author}}</li>
+    	<li>
+  			<div>
+        	<p>
+        	<img src="{{doc.image.url}}" alt="" style="width:100px;height:100px;"><br>
+        	author: <a href="{% url 'author' pk=doc.author %}">{{doc.author}}</a><br>
+          genre: <a href="{% url 'genre' pk=doc.genre %}">{{doc.genre}}</a><br>
+          title: <a href="{% url 'bookpage' pk=doc.pk %}">{{doc.title }}</a><br>
+          uploader: <a href="{% url 'uploader' pk=doc.uploader %}">{{doc.uploader}}</a>
+        </p>
+        	<a href="{{doc.document.url}}">read</a><br>
+        	rating: {{doc.rate1}}<br> 
+        	no of ratings: {{doc.no_ratings}}
+  			</div>
+    	</li>
   	{% endfor %}
   	</ul>
 {% endif %}

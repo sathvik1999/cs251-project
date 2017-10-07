@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  {% for object in docs %}
+    <li>
+        <div>
+          <p>
+          <img src="{{object.image.url}}" alt="" style="width:100px;height:100px;"><br>
+          author: <a href="{% url 'author' pk=object.author %}">{{object.author}}</a><br>
+          genre: <a href="{% url 'genre' pk=object.genre %}">{{object.genre}}</a><br>
+          title: <a href="{% url 'bookpage' pk=object.pk %}">{{ object.title }}</a><br>
+          uploader: <a href="{% url 'uploader' pk=object.uploader %}">{{object.uploader}}</a>
+          </p>
+          rating: {{object.rate1}}
+          no of ratings: {{object.no_ratings}}<br>
+          {% if s == 0 %}
+          <a href="{% url 'follow' pk=object.uploader %}">Follow</a> 
+          {% else %}
+          <a href="{% url 'unfollow' pk=object.uploader %}">unFollow</a> 
+          {% endif %}
+        </div>
+    </li>
+  {% endfor %}
+
+<p><a href="{% url 'home' %}">Return to home</a></p>
+{% endblock %}
