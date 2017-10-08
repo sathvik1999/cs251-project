@@ -9,7 +9,20 @@
           title: <a href="{% url 'bookpage' pk=doc.pk %}">{{doc.title }}</a><br>
           uploader: <a href="{% url 'uploader' pk=doc.uploader %}">{{doc.uploader}}</a>
         </p>
+        {% if doc.public and doc.user == user %}
         <a href="{{doc.document.url}}">read</a><br>
+        privacy : public <a href="{% url 'change' pk=doc.pk %}">change</a><br>
+        {% elif doc.user == user %}
+        <a href="{{doc.document.url}}">read</a><br>
+        privacy : private <a href="{% url 'change' pk=doc.pk %}">change</a><br>
+        {% elif doc.public %}
+        <a href="{{doc.document.url}}">read</a><br>
+        {% else %}
+        <p> you cannot read this book,you have to take the permission of uploader<br>
+            <a href="{% url 'bookpage' pk=doc.pk %}">chat</a><br>
+        </p>
+
+        {% endif %}
         rating: {{r1}}<br> no of ratings {{t}}
   </div>
 
@@ -19,6 +32,7 @@
     </form>
 <h2>your rating</h2>
 {{r.rating}}
+
 <p><a href="{% url 'home' %}">Return to home</a></p>
 
 {% endblock %}

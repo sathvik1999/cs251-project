@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block content %}
+admin: {{com.admin.username}}<br>
+<h2>Members</h2>
+  {% for m in mlist %}
+  {{m.username}}
+  {% endfor %}
+
+{% if user == com.admin %}
+<h2>Join requests</h2>
+{% for u in jplist %}
+  name: <a href="{% url 'uploader' pk=u.username %}">{{u.username}}</a>
+    <a href="{% url 'accept' pk=u.pk %}">accept</a><br>
+{% endfor %}
+
+{% endif %}
+<p><a href="{% url 'home' %}">Return to home</a></p>
+{% endblock %}

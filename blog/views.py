@@ -1,8 +1,9 @@
 from django.utils import timezone
-from .models import Interest,Document,Rate,Follow
+from .models import Interest,Document,Rate,Follow,Community,Join,JoinPending
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login , authenticate
-from .forms import SignUpForm,InterestForm,DocumentForm,RatingForm
+from django.contrib.auth.models import User
+from .forms import SignUpForm,InterestForm,DocumentForm,RatingForm,CommunityForm
 from django.shortcuts import redirect, render, get_object_or_404
 from django.conf import settings
 from django.core.files.storage import FileSystemStorage
@@ -15,7 +16,14 @@ def home(request):
     doc=Document.objects.order_by('published_date').filter(genre__in=interest.my_field)
     f=Follow.objects.get(user=request.user)
     fl=f.flist.all()
-    return render(request, 'home.html',{'documents': documents,'interest':interest,'doc':doc,'fl':fl})
+    communities=Community.objects.all().exclude(admin=request.user)
+    ocom=Community.objects.filter(admin=request.user)
+    jcom=Join.objects.get(user=request.user).jlist.all()
+    #if Community.objects.filter(admin=request.user):
+     #   jreq=Community.objects.get(admin=request.user).jrequests.all()
+    #else:
+     #   jreq=[]
+    return render(request, 'home.html',{'documents': documents,'interest':interest,'doc':doc,'fl':fl,'communities':communities,'jcom':jcom,'ocom':ocom})
 
 def signup(request):
     if request.method == 'POST':
@@ -28,6 +36,7 @@ def signup(request):
             login(request, user)
             Interest.objects.create(user=user,my_field=['fiction'])
             Follow.objects.create(user=user)
+            Join.objects.create(user=user)
             return redirect('home')
     else:
         form = SignUpForm()
@@ -77,7 +86,6 @@ def delete1(request, pk):
 
 def bookpage(request, pk):
     doc = get_object_or_404(Document, pk=pk)
-           
     if request.method == "POST":
         form = RatingForm(request.POST)
         if form.is_valid():
@@ -104,7 +112,7 @@ def bookpage(request, pk):
                 doc.rate1=r1
                 doc.no_ratings=t
                 doc.save()
-            return render(request,'bookpage.html',{'doc':doc,'form':form,'r':r,'r1':round(r1,2),'t':t})
+            return render(request,'bookpage.html',{'doc':doc,'form':form,'r':r,'r1':round(r1,2),'t':t,'user':request.user})
     else:
         form = RatingForm()
         tr=list(Rate.objects.filter(doc=doc).values_list('rating',flat=True))
@@ -160,3 +168,63 @@ def unfollow(request,pk):
     f.flist.remove(u)
     f.save()
     return render(request,'uploader.html',{'docs':documents,'s':0})
+
+
+def change(request,pk):
+    doc = get_object_or_404(Document, pk=pk)
+    doc.public=not(doc.public)
+    doc.save()
+    form = RatingForm()
+    tr=list(Rate.objects.filter(doc=doc).values_list('rating',flat=True))
+    if tr!=[]:
+        r1=float(sum(tr))/float(len(tr))
+        t=len(tr)
+        doc.rate=r1
+        doc.no_ratings=t
+        doc.save()
+    else:
+        r1=0
+        t=0
+        doc.rate=r1
+        doc.no_ratings=t 
+        doc.save() 
+    return render(request,'bookpage.html',{'doc':doc,'form':form,'r1':round(r1,2),'t':t})
+
+def community(request):
+    if request.method == 'POST':
+        form = CommunityForm(request.POST)
+        if form.is_valid():
+            post = form.save(commit=False)
+            post.admin=request.user
+            post.save()
+            JoinPending.objects.create(com=post)
+            return redirect('home')
+    else:
+        form = CommunityForm()
+    return render(request, 'createcommunity.html', {'form': form})
+    
+def cpage(request, pk):
+    com = get_object_or_404(Community, pk=pk)
+    mlist=com.members.all()
+    jplist=JoinPending.objects.get(com=com).jplist.all()
+    return render(request,'cpage.html',{'com':com,'mlist':mlist,'jplist':jplist})
+
+def srequest(request, pk):
+    com = get_object_or_404(Community, pk=pk)
+    com.jrequests.add(request.user)
+    JoinPending.objects.get(com=com).jplist.add(request.user)
+    return redirect('home')
+
+def accept(request, pk):
+    u = User.objects.get(pk=pk)
+    com=get_object_or_404(Community, admin=request.user)
+    com.members.add(request.user)
+    com.jrequests.remove(u)
+    Join.objects.get(user=request.user).jlist.add(com)
+    JoinPending.objects.get(com=com).jplist.remove(u)
+    return redirect('cpage',pk=com.pk)
+
+def leave(request, pk):
+    com = get_object_or_404(Community, pk=pk)
+    com.members.remove(request.user)
+    return redirect('home')

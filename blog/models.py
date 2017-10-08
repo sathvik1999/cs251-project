@@ -26,6 +26,7 @@ class Document(models.Model):
     description = models.CharField(max_length=255, blank=True)
     document = models.FileField(upload_to='documents/')
     image = models.ImageField(upload_to='images/',default = 'pic_folder/None/no-img.jpg')
+    public = models.BooleanField(default=True)
     published_date = models.DateTimeField(auto_now_add=True)
     
 class Rate(models.Model):
@@ -39,5 +40,24 @@ class Rate(models.Model):
 class Follow(models.Model):
     user=models.ForeignKey('auth.User',default=1)
     flist=models.ManyToManyField('auth.User',related_name='owner')
+
+class Community(models.Model):
+    admin=models.ForeignKey('auth.User',default=1)
+    members=models.ManyToManyField('auth.User',related_name='members')
+    name = models.CharField(max_length=200,default='')
+    description = models.CharField(max_length=255, blank=True)
+    documents=models.ManyToManyField('Document',related_name='docs')
+    jrequests=models.ManyToManyField('auth.User',related_name='jrequests')
+
+class Join(models.Model):
+    user=models.ForeignKey('auth.User',default=1)
+    jlist=models.ManyToManyField('Community',related_name='jlist')
+
+class JoinPending(models.Model):
+    com=models.ForeignKey('Community',default=1)
+    jplist=models.ManyToManyField('auth.User',related_name='jplist')
+
+
+    
 
     

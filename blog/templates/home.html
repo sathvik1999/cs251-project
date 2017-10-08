@@ -7,6 +7,7 @@
   <a href="{% url 'interests' %}">Interests</a><br>
   <a href="{% url 'upfile' %}">upfile</a><br>
   <a href="{% url 'search' %}">search</a><br>
+  <a href="{% url 'community' %}">create community</a><br>
 <h2>your uploads</h2>
 {% for object in documents %}
     <div>
@@ -43,6 +44,22 @@
 <h2>Notifications</h2>
 {% for u in fl %}
     {{ u.get_full_name }}
+{% endfor %}
+<h2>owned communities</h2>
+{% for c in ocom %}
+    name: <a href="{% url 'cpage' pk=c.pk %}">{{ c.name }}</a>
+    requests: 
+{% endfor %}
+<h2>joined communities</h2>
+{% for c in jcom %}
+    name: <a href="{% url 'cpage' pk=c.pk %}">{{ c.name }}</a>
+    <a href="{% url 'leave' pk=c.pk %}">leave</a><br>
+{% endfor %}
+<h2>Other communities</h2>
+{% for c in communities %}
+    name: <a href="{% url 'cpage' pk=c.pk %}">{{ c.name }}</a>
+    <a href="{% url 'srequest' pk=c.pk %}">join</a><br>
+    description: {{c.description}}<br>
 {% endfor %}
 
 {% endblock %}

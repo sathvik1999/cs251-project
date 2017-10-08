@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
-from .models import Interest,Document,Rate
+from .models import Interest,Document,Rate,Community
 #from uploads.core.models import Document
 
 
@@ -27,9 +27,15 @@ class InterestForm(forms.ModelForm):
 class DocumentForm(forms.ModelForm):
     class Meta:
         model = Document
-        fields = ('title','author','genre','description', 'document', 'image',)
+        fields = ('title','author','genre','description', 'document', 'image','public')
 
 class RatingForm(forms.ModelForm):
     class Meta:
         model = Rate
         fields = ('rating',)
+
+class CommunityForm(forms.ModelForm):
+    class Meta:
+        model = Community
+        fields = ('name','description',)
+
