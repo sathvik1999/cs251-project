@@ -16,14 +16,18 @@ def home(request):
     doc=Document.objects.order_by('published_date').filter(genre__in=interest.my_field)
     f=Follow.objects.get(user=request.user)
     fl=f.flist.all()
-    communities=Community.objects.all().exclude(admin=request.user)
-    ocom=Community.objects.filter(admin=request.user)
+    Communities=Community.objects.all().exclude(admin=request.user)
+    communities=[c for c in Communities]
+    jpclist=map(lambda x:[x,JoinPending.objects.get(com=x).jplist.all()],communities)
+    oCom=Community.objects.filter(admin=request.user)
+    ocom=[c for c in oCom]
+    opclist=map(lambda x:[x,JoinPending.objects.get(com=x).jplist.all().count()],ocom)
     jcom=Join.objects.get(user=request.user).jlist.all()
     #if Community.objects.filter(admin=request.user):
      #   jreq=Community.objects.get(admin=request.user).jrequests.all()
     #else:
      #   jreq=[]
-    return render(request, 'home.html',{'documents': documents,'interest':interest,'doc':doc,'fl':fl,'communities':communities,'jcom':jcom,'ocom':ocom})
+    return render(request, 'home.html',{'documents': documents,'interest':interest,'doc':doc,'fl':fl,'jpclist':jpclist,'jcom':jcom,'opclist':opclist})
 
 def signup(request):
     if request.method == 'POST':
@@ -215,16 +219,23 @@ def srequest(request, pk):
     JoinPending.objects.get(com=com).jplist.add(request.user)
     return redirect('home')
 
+def crequest(request, pk):
+    com = get_object_or_404(Community, pk=pk)
+    com.jrequests.remove(request.user)
+    JoinPending.objects.get(com=com).jplist.remove(request.user)
+    return redirect('home')
+
 def accept(request, pk):
     u = User.objects.get(pk=pk)
     com=get_object_or_404(Community, admin=request.user)
-    com.members.add(request.user)
+    com.members.add(u)
     com.jrequests.remove(u)
-    Join.objects.get(user=request.user).jlist.add(com)
+    Join.objects.get(user=u).jlist.add(com)
     JoinPending.objects.get(com=com).jplist.remove(u)
     return redirect('cpage',pk=com.pk)
 
 def leave(request, pk):
     com = get_object_or_404(Community, pk=pk)
     com.members.remove(request.user)
+    Join.objects.get(user=request.user).jlist.remove(com)
     return redirect('home')

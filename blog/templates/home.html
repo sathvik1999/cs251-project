@@ -46,9 +46,9 @@
     {{ u.get_full_name }}
 {% endfor %}
 <h2>owned communities</h2>
-{% for c in ocom %}
+{% for c,count in opclist %}
     name: <a href="{% url 'cpage' pk=c.pk %}">{{ c.name }}</a>
-    requests: 
+    requests: {{count}}
 {% endfor %}
 <h2>joined communities</h2>
 {% for c in jcom %}
@@ -56,9 +56,13 @@
     <a href="{% url 'leave' pk=c.pk %}">leave</a><br>
 {% endfor %}
 <h2>Other communities</h2>
-{% for c in communities %}
-    name: <a href="{% url 'cpage' pk=c.pk %}">{{ c.name }}</a>
+{% for c,l in jpclist %}
+    name: {{ c.name }}
+    {% if user in l %}
+    <a href="{% url 'crequest' pk=c.pk %}">cancelrequest</a><br>
+    {% else %}
     <a href="{% url 'srequest' pk=c.pk %}">join</a><br>
+    {% endif %}
     description: {{c.description}}<br>
 {% endfor %}
 

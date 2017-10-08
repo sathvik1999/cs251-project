@@ -23,6 +23,7 @@ urlpatterns = [
  	url(ur'^login/follow/(?P<pk>\w+)/$',entry_views.follow,name='follow'),
  	url(ur'^login/unfollow/(?P<pk>\w+)/$',entry_views.unfollow,name='unfollow'),
  	url(ur'^login/srequest/(?P<pk>\w+)/$',entry_views.srequest,name='srequest'),
+ 	url(ur'^login/crequest/(?P<pk>\w+)/$',entry_views.crequest,name='crequest'),
  	url(ur'^login/accept/(?P<pk>\w+)/$',entry_views.accept,name='accept'),
  	url(ur'^login/leave/(?P<pk>\w+)/$',entry_views.leave,name='leave'),    
 ]
