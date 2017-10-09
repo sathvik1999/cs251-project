@@ -27,7 +27,10 @@ class Document(models.Model):
     document = models.FileField(upload_to='documents/')
     image = models.ImageField(upload_to='images/',default = 'pic_folder/None/no-img.jpg')
     public = models.BooleanField(default=True)
+    rmembers=models.ManyToManyField('auth.User',related_name='rmembers')
     published_date = models.DateTimeField(auto_now_add=True)
+    searchshow = models.BooleanField(default=True)
+    
     
 class Rate(models.Model):
     user=models.ForeignKey('auth.User',default=1)
@@ -58,6 +61,25 @@ class JoinPending(models.Model):
     jplist=models.ManyToManyField('auth.User',related_name='jplist')
 
 
-    
+class Advertise(models.Model):
+    genre_choices=(('fiction','fiction'),('fear','fear'),("fear1","fear1"),("fear2","fear2"),("fear3","fear3"),)
+    user=models.ForeignKey('auth.User',default=1)
+    uploader = models.CharField(max_length=200,default='')
+    title = models.CharField(max_length=200,default='')
+    author = models.CharField(max_length=200,default='')
+    genre = models.CharField(
+        max_length=20,
+        choices=genre_choices,
+        default='fiction',)
+    description = models.CharField(max_length=255, blank=True)
+    image = models.ImageField(upload_to='images/',default = 'pic_folder/None/no-img.jpg')
+    published_date = models.DateTimeField(auto_now_add=True)
+
+
+class Readpending(models.Model):
+    user=models.ForeignKey('auth.User',default=1)
+    doc=models.ForeignKey(Document)
+    rplist=models.ManyToManyField('auth.User',related_name='rplist')
+
 
     

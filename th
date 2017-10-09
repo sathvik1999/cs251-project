@@ -1,8 +1,3 @@
-sent request
-your communities 
-members leave
-admin no leave
-admin can have multiple communities
-name: <a href="{% url 'uploader' pk=j.username %}">{{j.username}}</a>
-    <a href="{% url 'accept' pk=j.pk %}">accept</a><br>
-    
+books in communities
+advertise
+private books send request

@@ -15,13 +15,19 @@
         {% elif doc.user == user %}
         <a href="{{doc.document.url}}">read</a><br>
         privacy : private <a href="{% url 'change' pk=doc.pk %}">change</a><br>
+        {%elif user in mlist %}
+        <a href="{{doc.document.url}}">read</a><br>
         {% elif doc.public %}
         <a href="{{doc.document.url}}">read</a><br>
         {% else %}
         <p> you cannot read this book,you have to take the permission of uploader<br>
+            {% if user in rplist %}
+            <a href="{% url 'bookpage' pk=doc.pk %}">cancel request</a><br>
+            {% else %}
+            <a href="{% url 'prequest' pk=doc.pk %}">send request</a><br>
+            {% endif %}
             <a href="{% url 'bookpage' pk=doc.pk %}">chat</a><br>
         </p>
-
         {% endif %}
         rating: {{r1}}<br> no of ratings {{t}}
   </div>

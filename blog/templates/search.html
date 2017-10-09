@@ -13,6 +13,7 @@
 {% else %}
     <ul>
   	{% for doc in filter.qs %}
+    {% if doc.searchshow %}
     	<li>
   			<div>
         	<p>
@@ -27,6 +28,7 @@
         	no of ratings: {{doc.no_ratings}}
   			</div>
     	</li>
+    {% endif %}
   	{% endfor %}
   	</ul>
 {% endif %}
