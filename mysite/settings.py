@@ -32,13 +32,14 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'django.contrib.admin',
-    'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'blog',
-    'star_ratings'
+    'star_ratings',
+    'django.contrib.auth',
+    
 ]
 
 MIDDLEWARE = [
@@ -69,7 +70,7 @@ TEMPLATES = [
         },
     },
 ]
-
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 WSGI_APPLICATION = 'mysite.wsgi.application'
 
 

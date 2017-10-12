@@ -21,6 +21,8 @@
       </p>
     {% endfor %}
     <button type="submit">Log in</button>
+    <a href="{% url 'password_reset' %}">Forgot Password</a>
+    <br><br>
     New User?<a href="{% url 'signup' %}">Sign up</a>
   </form>
 {% endblock %}
