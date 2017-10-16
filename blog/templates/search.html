@@ -11,6 +11,7 @@
 {% elif filter.qs.count == 0 %}
 	no searches found
 {% else %}
+    <div id="menu">
     <ul>
   	{% for doc in filter.qs %}
     {% if doc.searchshow %}
@@ -31,6 +32,7 @@
     {% endif %}
   	{% endfor %}
   	</ul>
+  </div>
 {% endif %}
 <p><a href="{% url 'home' %}">Return to home</a></p>
 {% endblock %}

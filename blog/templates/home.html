@@ -3,24 +3,28 @@
 {% block content %}
   <h2>Welcome, {{ user.get_full_name }} !</h2>
   <p>Your email address: {{ user.email }}</p>
-  <a href="{% url 'reset' %}">reset-password</a><br>
-  <a href="{% url 'interests' %}">Interests</a><br>
+  <img src="{{p.picture.url}}" alt="" style="width:100px;height:100px;"><br>
+  <a href="{% url 'settings' %}">Settings</a><br>
   <a href="{% url 'upfile' %}">upfile</a><br>
   <a href="{% url 'search' %}">search</a><br>
   <a href="{% url 'community' %}">create community</a><br>
   <a href="{% url 'advertise' %}">advertise</a><br>
 <h2>your uploads</h2>
+<div id="menu">
+<ul>
 {% for object in documents %}
-    <div>
+    <li>
         <p>
         <img src="{{object.image.url}}" alt="" style="width:100px;height:100px;"><br>
         author: <a href="{% url 'author' pk=object.author %}">{{object.author}}</a><br>
         genre: <a href="{% url 'genre' pk=object.genre %}">{{object.genre}}</a><br>
-        title: <a href="{% url 'bookpage' pk=object.pk %}">{{ object.title }}</a>
-        delete this book : <a href="{% url 'delete' pk=object.pk %}">delete</a>
+        title: <a href="{% url 'bookpage' pk=object.pk %}">{{ object.title }}</a><br>
+        delete book : <a href="{% url 'delete' pk=object.pk %}">delete</a><br>
         </p>
-    </div>
+    </li>
 {% endfor %}
+</ul>
+</div>
 <h2>your ads</h2>
 {% for object in ads %}
     <div>
@@ -40,31 +44,38 @@
   {{l.username}}<a href="{% url 'acceptread' pk=l.pk pk1=doc.pk %}">accept</a>
   {% endfor %}
 {% endfor %}
+<h2>All genres</h2>
+
+{% for i in choices %}
+    <a href="{% url 'genre' pk=i %}">{{i}}</a><br>
+{% endfor %}
+
 <h2>your interests</h2>
+
 {% for i in interest.my_field %}
     <a href="{% url 'genre' pk=i %}">{{i}}</a>
         <br>
 {% endfor %}
+
 <h2>suggestions</h2>
+<div id="menu" >
+<ul >
 {% for object in doc %}
     <li>
-        <div>
-          <p>
           <img src="{{object.image.url}}" alt="" style="width:100px;height:100px;"> <br>
           author: <a href="{% url 'author' pk=object.author %}">{{object.author}}</a><br>
           genre: <a href="{% url 'genre' pk=object.genre %}">{{object.genre}}</a> <br>
           title: <a href="{% url 'bookpage' pk=object.pk %}">{{ object.title }}</a><br>
-          uploader: <a href="{% url 'uploader' pk=object.uploader %}">{{object.uploader}}</a>
-          </p>
-          rating: {{object.rate1}}
-          no of ratings: {{objects.no_ratings}}<br> 
-        </div>
+          uploader: <a href="{% url 'uploader' pk=object.uploader %}">{{object.uploader}}</a><br>
+          rating: {{object.rate1}}<br>
+          no of ratings: {{object.no_ratings}}<br> 
     </li>
 {% endfor %}
-<h2>Notifications</h2>
-{% for u in fl %}
-    {{ u.get_full_name }}
-{% endfor %}
+</ul>
+</div>
+<br>
+<a href="{% url 'notes' %}">Notifications</a><br>
+  
 <h2>owned communities</h2>
 {% for c,count in opclist %}
     name: <a href="{% url 'cpage' pk=c.pk %}">{{ c.name }}</a>

@@ -1,14 +1,20 @@
 from django.db import models
 from django.utils import timezone
 from multiselectfield import MultiSelectField
+from django.db.models.signals import post_save
+from django.dispatch import receiver
 #from django.contrib.postgres.fields import ArrayField
 
-
+class Profile(models.Model):
+    user = models.OneToOneField('auth.User', on_delete=models.CASCADE)
+    picture=models.ImageField(upload_to='images/',default = 'pic_folder/None/no-img.jpg')
+    #published_date = models.DateTimeField(blank=True, null=True)
+    
 class Interest(models.Model):
-    user=models.ForeignKey('auth.User',default=1)
+    user=models.OneToOneField('auth.User',default=1)
     my_field = MultiSelectField(choices=(('fiction','fiction'),('fear','fear'),("fear1","fear1"),("fear2","fear2"),("fear3","fear3"),),default='fiction')
-    published_date = models.DateTimeField(
-            blank=True, null=True)
+    #published_date = models.DateTimeField(
+     #       blank=True, null=True)
     
     
 class Document(models.Model):
@@ -36,12 +42,10 @@ class Rate(models.Model):
     user=models.ForeignKey('auth.User',default=1)
     doc=models.ForeignKey(Document)
     rating = models.IntegerField(choices=((1,1),(2,2),(3,3),(4,4),(5,5)),default=1)
-    published_date = models.DateTimeField(blank=True, null=True)  
-
 
 
 class Follow(models.Model):
-    user=models.ForeignKey('auth.User',default=1)
+    user=models.OneToOneField('auth.User',default=1)
     flist=models.ManyToManyField('auth.User',related_name='owner')
 
 class Community(models.Model):

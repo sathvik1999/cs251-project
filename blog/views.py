@@ -1,10 +1,10 @@
 from django.utils import timezone
-from .models import Interest,Document,Rate,Follow,Community,Join,JoinPending,Advertise,Readpending
+from .models import Interest,Document,Rate,Follow,Community,Join,JoinPending,Advertise,Readpending,Profile
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login , authenticate,update_session_auth_hash
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import PasswordChangeForm
-from .forms import SignUpForm,InterestForm,DocumentForm,RatingForm,CommunityForm,AdvertiseForm,DocumentCForm
+from .forms import SignUpForm,InterestForm,DocumentForm,RatingForm,CommunityForm,AdvertiseForm,DocumentCForm,ProfileForm
 from django.shortcuts import redirect, render, get_object_or_404
 from django.conf import settings
 from django.core.files.storage import FileSystemStorage
@@ -15,10 +15,10 @@ from django.contrib import messages
 def home(request):
     documents = Document.objects.order_by('published_date').filter(user=request.user,searchshow=True)
     ads = Advertise.objects.order_by('published_date').filter(user=request.user)
-    interest = Interest.objects.filter(user=request.user).order_by('-published_date').first()
-    doc=Document.objects.order_by('published_date').filter(genre__in=interest.my_field,searchshow=True)
-    f=Follow.objects.get(user=request.user)
-    fl=f.flist.all()
+    interest = Interest.objects.get(user=request.user)
+    choices=['fiction','fear','fear1','fear2','fear3']
+    p = Profile.objects.get(user=request.user)#.order_by('-published_date').first()
+    doc=Document.objects.order_by('published_date').filter(genre__in=interest.my_field,searchshow=True).exclude(user=request.user)
     Communities=Community.objects.all().exclude(admin=request.user)
     communities=[c for c in Communities]
     jpclist=map(lambda x:[x,JoinPending.objects.get(com=x).jplist.all()],communities)
@@ -28,7 +28,7 @@ def home(request):
     jcom=Join.objects.get(user=request.user).jlist.all()
     readreq=Readpending.objects.filter(user=request.user)
     rplist=map(lambda x:[x.doc,x.rplist.all()],readreq)
-    return render(request, 'home.html',{'documents': documents,'ads':ads,'interest':interest,'doc':doc,'fl':fl,'jpclist':jpclist,'jcom':jcom,'opclist':opclist,'rplist':rplist})
+    return render(request, 'home.html',{'documents': documents,'ads':ads,'interest':interest,'doc':doc,'jpclist':jpclist,'jcom':jcom,'opclist':opclist,'rplist':rplist,'p':p,'choices':choices})
 
 def signup(request):
     if request.method == 'POST':
@@ -41,24 +41,31 @@ def signup(request):
             login(request, user)
             Interest.objects.create(user=user,my_field=['fiction'])
             Follow.objects.create(user=user)
+            Profile.objects.create(user=user)
             Join.objects.create(user=user)
             return redirect('home')
     else:
         form = SignUpForm()
     return render(request, 'signup.html', {'form': form})
 
+def propic(request):
+    if request.method == 'POST':
+        form = ProfileForm(request.POST, request.FILES,instance=request.user.profile)
+        if form.is_valid():
+            form.save()
+            return redirect('settings')
+    else:
+        form = ProfileForm(instance=request.user.profile)
+    return render(request, 'propic.html', {'form': form})
+
 def interests(request):
     if request.method == "POST":
-        form = InterestForm(request.POST)
+        form = InterestForm(request.POST,instance=request.user.interest)
         if form.is_valid():
-            post = form.save(commit=False)
-            post.user = request.user
-            #post.genre= form.cleaned_data['Interests']
-            post.published_date =timezone.now()
-            post.save()
-            return redirect('home')
+            form.save()
+            return redirect('settings')
     else:
-        form = InterestForm()
+        form = InterestForm(instance=request.user.interest)
     return render(request, 'interests.html', {'form': form})
 
 def upfile(request):
@@ -89,6 +96,15 @@ def advertise(request):
     else:
         form = AdvertiseForm()
     return render(request, 'model_form_upload.html', {'form': form})
+
+def settings(request):
+    return render(request,'settings.html')
+
+def notes(request):
+    f=Follow.objects.get(user=request.user)
+    fl=f.flist.all()
+    d=Document.objects.filter(user__in=fl).order_by('-published_date')
+    return render(request,'notes.html',{'fl':fl,'d':d})
 
 def search(request):
     Document_list = Document.objects.all()
@@ -130,7 +146,6 @@ def bookpage(request, pk):
             #print(Rate.objects.get(doc=doc,user=request.user).rating)
             if tr!=[]:
                 r1=float(sum(tr))/float(len(tr))
-                print(tr)
                 t=len(tr)
                 d1=Document.objects.get(document=doc.document)
                 d1.rate1=r1
@@ -195,16 +210,17 @@ def uploader(request,pk):
         s=1
     else:
         s=0
-    return render(request,'uploader.html',{'docs':documents,'s':s})
+    return render(request,'uploader.html',{'docs':documents,'s':s,'pk':pk})
 
 
 def follow(request,pk):
+    print(pk)
     documents=Document.objects.filter(uploader=pk)
     u=documents.first().user
     f=Follow.objects.get(user=request.user)
     f.flist.add(u)
     f.save()
-    return render(request,'uploader.html',{'docs':documents,'s':1})
+    return render(request,'uploader.html',{'docs':documents,'s':1,'pk':pk})
 
 
 def unfollow(request,pk):
@@ -213,7 +229,7 @@ def unfollow(request,pk):
     f=Follow.objects.get(user=request.user)
     f.flist.remove(u)
     f.save()
-    return render(request,'uploader.html',{'docs':documents,'s':0})
+    return render(request,'uploader.html',{'docs':documents,'s':0,'pk':pk})
 
 
 def change(request,pk):

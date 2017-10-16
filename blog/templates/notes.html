@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<ul> 
+{% for doc in d %}
+    <li> <a href="{% url 'uploader' pk=doc.uploader %}">{{doc.uploader}}</a> has uploaded <a href="{% url 'bookpage' pk=doc.pk %}">{{doc.title }}</a>
+{% endfor %}
+</ul>
+<p><a href="{% url 'home' %}">Return to home</a></p>
+{% endblock %}

@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <a href="{% url 'interests' %}">Interests</a><br>
+  <a href="{% url 'propic' %}">change profile picture</a><br>
+  <a href="{% url 'reset' %}">change password</a><br>
+  
+  
+<p><a href="{% url 'home' %}">Return to home</a></p>
+{% endblock %}
