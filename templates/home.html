@@ -5,10 +5,12 @@
   <p>Your email address: {{ user.email }}</p>
   <img src="{{p.picture.url}}" alt="" style="width:100px;height:100px;"><br>
   <a href="{% url 'settings' %}">Settings</a><br>
+  <a href="{% url 'test' %}">test</a><br>
   <a href="{% url 'upfile' %}">upfile</a><br>
   <a href="{% url 'search' %}">search</a><br>
   <a href="{% url 'community' %}">create community</a><br>
   <a href="{% url 'advertise' %}">advertise</a><br>
+  <a href="{% url 'messages' pk=user.pk %}">messages</a><br>
 <h2>your uploads</h2>
 <div id="menu">
 <ul>

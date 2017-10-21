@@ -100,6 +100,9 @@ def advertise(request):
 def settings(request):
     return render(request,'settings.html')
 
+def test(request):
+    return render(request,'login_new.html')
+
 def notes(request):
     f=Follow.objects.get(user=request.user)
     fl=f.flist.all()

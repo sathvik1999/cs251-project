@@ -46,7 +46,7 @@ class Rate(models.Model):
 
 class Follow(models.Model):
     user=models.OneToOneField('auth.User',default=1)
-    flist=models.ManyToManyField('auth.User',related_name='owner')
+    flist=models.ManyToManyField('auth.User',related_name='owner1')
 
 class Community(models.Model):
     admin=models.ForeignKey('auth.User',default=1)

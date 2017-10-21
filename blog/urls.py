@@ -3,9 +3,13 @@ from django.contrib.auth import views as auth_views
 from django.conf.urls.static import static
 from django.conf import settings
 from . import views as entry_views
+from .forms import SignUpForm,InterestForm,DocumentForm,RatingForm,CommunityForm,AdvertiseForm,DocumentCForm,ProfileForm
+form1=SignUpForm()
 urlpatterns = [
     url(r'^$', entry_views.home, name='home'),
-    url(r'^login/$', auth_views.login, {'template_name': 'login.html'}, name='login'),
+    url(r'^test/$', entry_views.test, name='test'),
+    url(r'^login/$', auth_views.login, {'template_name': 'login.html', 'extra_context': {'form1':form1 ,},},
+         name='login'),
     url(r'^logout/$', auth_views.logout, {'next_page': 'login'}, name='logout'),
     url(r'^signup/$', entry_views.signup, name='signup'),
     url(r'^login/interests/$',entry_views.interests,name='interests'),
