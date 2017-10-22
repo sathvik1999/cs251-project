@@ -101,7 +101,7 @@ def settings(request):
     return render(request,'settings.html')
 
 def test(request):
-    return render(request,'login_new.html')
+    return render(request,'test.html')
 
 def notes(request):
     f=Follow.objects.get(user=request.user)

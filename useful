@@ -1,0 +1,151 @@
+<h2>Sign up</h2>
+  <div class=>
+  <form style="width: 30%" method="post">
+    {% csrf_token %}
+    {% for field in form %}
+      <p>
+        {{ field.label_tag }}
+        {{ field }}
+        <!--{% if field.help_text %}
+          <small style="color: grey">{{ field.help_text }}</small>
+        {% endif %}
+        {% for error in field.errors %}
+          <p style="color: red">{{ error }}</p>
+        {% endfor %}-->
+      </p>
+    {% endfor %}
+    <button type="submit">Sign up</button>
+  </form>
+</div>
+
+
+<div class="container">
+            <h2>Sign up</h2>
+            <div style="width:50%">
+                <form method="post">
+                    {%csrf_token%}
+                    {% for error in form.non_field_errors %}
+                    <div class="form-group has-errors text-danger small">
+                        {{error}}
+                    </div>
+                    {% endfor %}
+                    {% for field in form %}
+                    <div class="form-group has-errors text-danger small">
+                        {{field.errors}}
+                    </div>
+                    <div class="form-group has-errors text-danger small">
+                    </div>
+                    <div class="form-group">
+                      {{ field.label_tag }}<br>
+                        {{field}}
+                    </div>
+                    {% endfor %}
+                    <button class="btn btn-primary" type="submit" style="width:30%">Sign Up</button>
+            </div>
+            </form>
+        </div>
+
+
+
+
+/////////////home things//////////////////////////
+<h2>Welcome, {{ user.get_full_name }} !</h2>
+  <p>Your email address: {{ user.email }}</p>
+  <img src="{{p.picture.url}}" alt="" style="width:100px;height:100px;"><br>
+  <a href="{% url 'settings' %}">Settings</a><br>
+  <a href="{% url 'test' %}">test</a><br>
+  <a href="{% url 'upfile' %}">upfile</a><br>
+  <a href="{% url 'search' %}">search</a><br>
+  <a href="{% url 'community' %}">create community</a><br>
+  <a href="{% url 'advertise' %}">advertise</a><br>
+  <a href="{% url 'messages' pk=user.pk %}">messages</a><br>
+<h2>your uploads</h2>
+<div id="menu">
+<ul>
+{% for object in documents %}
+    <li>
+        <p>
+        <img src="{{object.image.url}}" alt="" style="width:100px;height:100px;"><br>
+        author: <a href="{% url 'author' pk=object.author %}">{{object.author}}</a><br>
+        genre: <a href="{% url 'genre' pk=object.genre %}">{{object.genre}}</a><br>
+        title: <a href="{% url 'bookpage' pk=object.pk %}">{{ object.title }}</a><br>
+        delete book : <a href="{% url 'delete' pk=object.pk %}">delete</a><br>
+        </p>
+    </li>
+{% endfor %}
+</ul>
+</div>
+<h2>your ads</h2>
+{% for object in ads %}
+    <div>
+        <p>
+        <img src="{{object.image.url}}" alt="" style="width:100px;height:100px;"><br>
+        author: <a href="{% url 'author' pk=object.author %}">{{object.author}}</a><br>
+        genre: <a href="{% url 'genre' pk=object.genre %}">{{object.genre}}</a><br>
+        title: <a href="{% url 'adpage' pk=object.pk %}">{{ object.title }}</a>
+        delete this book : <a href="{% url 'deletead' pk=object.pk %}">delete ad</a>
+        </p>
+    </div>
+{% endfor %}
+<h2>read requests</h2>
+{% for doc,li in rplist %}
+  {% for l in li %}
+  <a href="{% url 'bookpage' pk=doc.pk %}">{{ doc.title }}</a>
+  {{l.username}}<a href="{% url 'acceptread' pk=l.pk pk1=doc.pk %}">accept</a>
+  {% endfor %}
+{% endfor %}
+<h2>All genres</h2>
+
+{% for i in choices %}
+    <a href="{% url 'genre' pk=i %}">{{i}}</a><br>
+{% endfor %}
+
+<h2>your interests</h2>
+
+{% for i in interest.my_field %}
+    <a href="{% url 'genre' pk=i %}">{{i}}</a>
+        <br>
+{% endfor %}
+
+<h2>suggestions</h2>
+<div id="menu" >
+<ul >
+{% for object in doc %}
+    <li>
+          <img src="{{object.image.url}}" alt="" style="width:100px;height:100px;"> <br>
+          author: <a href="{% url 'author' pk=object.author %}">{{object.author}}</a><br>
+          genre: <a href="{% url 'genre' pk=object.genre %}">{{object.genre}}</a> <br>
+          title: <a href="{% url 'bookpage' pk=object.pk %}">{{ object.title }}</a><br>
+          uploader: <a href="{% url 'uploader' pk=object.uploader %}">{{object.uploader}}</a><br>
+          rating: {{object.rate1}}<br>
+          no of ratings: {{object.no_ratings}}<br> 
+    </li>
+{% endfor %}
+</ul>
+</div>
+<br>
+<a href="{% url 'notes' %}">Notifications</a><br>
+  
+<h2>owned communities</h2>
+{% for c,count in opclist %}
+    name: <a href="{% url 'cpage' pk=c.pk %}">{{ c.name }}</a>
+    requests: {{count}}
+{% endfor %}
+<h2>joined communities</h2>
+{% for c in jcom %}
+    name: <a href="{% url 'cpage' pk=c.pk %}">{{ c.name }}</a>
+    <a href="{% url 'leave' pk=c.pk %}">leave</a><br>
+{% endfor %}
+<h2>Other communities</h2>
+{% for c,l in jpclist %}
+    {% if not c in jcom %}
+    name: {{ c.name }}
+    {% if user in l %}
+    <a href="{% url 'crequest' pk=c.pk %}">cancelrequest</a><br>
+    {% else %}
+    <a href="{% url 'srequest' pk=c.pk %}">join</a><br>
+    {% endif %}
+    description: {{c.description}}<br>
+    {% endif %}
+{% endfor %}
+ 

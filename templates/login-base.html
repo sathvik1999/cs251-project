@@ -1,13 +1,10 @@
 <!DOCTYPE html>
 {% load static %}
-<html lang="en">
-<head>
-  <!-- Theme Made By www.w3schools.com - No Copyright -->
-  <title>Bootstrap Theme The Band</title>
-  <meta charset="utf-8">
+<html>
+    <head>
+        <title></title>
+        <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="{% static "css/bootstrap.css" %}">
-  <link rel="stylesheet" href="{% static "css/font-awesome.css" %}">
   <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css" rel="stylesheet"/>
   <link rel="stylesheet" href="{% static "js/jquery.js" %}">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -20,14 +17,10 @@
       font: 400 15px/1.8 Lato, sans-serif;
       color: #777;
   }
-  
-  /* login form*/
-  
-  /* Full-width input fields */
-input[type=text], input[type=password] {
-    width: 100%;
-    padding: 12px 20px;
-    margin: 8px 0;
+  input[type=text], input[type=password] {
+    width: 70%;
+    padding: 2px 10px;
+    margin: 1px 0;
     display: inline-block;
     border: 1px solid #ccc;
     box-sizing: border-box;
@@ -35,8 +28,8 @@ input[type=text], input[type=password] {
 
 /* Set a style for all buttons */
 button {
-	
-   	  font-family: Montserrat, sans-serif;
+  
+      font-family: Montserrat, sans-serif;
       margin-bottom: 0;
       padding:15px;
       background-color: #2d2d30;
@@ -50,152 +43,11 @@ button {
 
 
 /* Extra styles for the cancel button */
-.cancelbtn {
-    width: auto;
-    padding: 10px 18px;
-    background-color: #f44336;
-}
 
-/* Center the image and position the close button */
-.imgcontainer {
-    text-align: center;
-    margin: 24px 0 12px 0;
-    position: relative;
-}
-
-.container {
-    padding: 16px;
-}
-
-span.psw {
-    float: right;
-    padding-top: 16px;
-}
 
 /* The Modal (background) */
-.modal {
-    display: none; /* Hidden by default */
-    position: fixed; /* Stay in place */
-    z-index: 1; /* Sit on top */
-    left: 0;
-    top: 0;
-    width: 100%; /* Full width */
-    height: 100%; /* Full height */
-    overflow: auto; /* Enable scroll if needed */
-    background-color: rgb(0,0,0); /* Fallback color */
-    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
-    padding-top: 60px;
-}
-
-/* Modal Content/Box */
-.modal-content {
-    background-color: #fefefe;
-    margin: 5% auto 15% auto; /* 5% from the top, 15% from the bottom and centered */
-    border: 1px solid #888;
-    width: 80%; /* Could be more or less, depending on screen size */
-}
 
 /* The Close Button (x) */
-.close {
-    position: absolute;
-    right: 25px;
-    top: 0;
-    color: #000;
-    font-size: 35px;
-    font-weight: bold;
-}
-
-.close:hover,
-.close:focus {
-    color: red;
-    cursor: pointer;
-}
-
-/* Add Zoom Animation */
-.animate {
-    -webkit-animation: animatezoom 0.6s;
-    animation: animatezoom 0.6s
-}
-
-@-webkit-keyframes animatezoom {
-    from {-webkit-transform: scale(0)} 
-    to {-webkit-transform: scale(1)}
-}
-    
-@keyframes animatezoom {
-    from {transform: scale(0)} 
-    to {transform: scale(1)}
-}
-
-/* Change styles for span and cancel button on extra small screens */
-@media screen and (max-width: 300px) {
-    span.psw {
-       display: block;
-       float: none;
-    }
-    .cancelbtn {
-       width: 100%;
-    }
-}
-
- /*end login form*/
-  h3, h4 {
-      margin: 10px 0 30px 0;
-      letter-spacing: 10px;      
-      font-size: 20px;
-      color: #111;
-  }
-  .container {
-      padding: 80px 120px;
-  }
-  .person {
-      border: 10px solid transparent;
-      margin-bottom: 25px;
-      width: 80%;
-      height: 80%;
-      
-  }
-  .person:hover {
-      border-color: #f1f1f1;
-  }
-  .carousel-inner img {
-      width:1700px;
-      height:500px; /* Set width to 100% */
-      margin-top: 45px;
-      margin-left: auto;
-      margin-right: auto;
-  }
-  .carousel-caption h3 {
-      color: #fff !important;
-  }
-  @media (max-width: 600px) {
-    .carousel-caption {
-      display: none; /* Hide the carousel text when the screen is less than 600 pixels wide */
-    }
-  }
-  .bg-1 {
-      background: #2d2d30;
-      color: #bdbdbd;
-  }
-  .bg-1 h3 {color: #fff;}
-  .bg-1 p {font-style: italic;}
-  .list-group-item:first-child {
-      border-top-right-radius: 0;
-      border-top-left-radius: 0;
-  }
-  .list-group-item:last-child {
-      border-bottom-right-radius: 0;
-      border-bottom-left-radius: 0;
-  }
-  .thumbnail {
-      padding: 0 0 15px 0;
-      border: none;
-      border-radius: 0;
-  }
-  .thumbnail p {
-      margin-top: 15px;
-      color: #555;
-  }
   .btn {
       padding: 10px 20px;
       background-color: #333;
@@ -208,130 +60,22 @@ span.psw {
       background-color: #fff;
       color: #000;
   }
-  .modal-header, h4, .close {
-      background-color: #333;
-      color: #fff !important;
-      text-align: center;
-      font-size: 30px;
-  }
-  .modal-header, .modal-body {
-      padding: 40px 50px;
-  }
-  .nav-tabs li a {
-      color: #777;
-  }
-  #googleMap {
-      width: 100%;
-      height: 400px;
-      -webkit-filter: grayscale(100%);
-      filter: grayscale(100%);
-  }  
-  .navbar {
-      font-family: Montserrat, sans-serif;
-      margin-bottom: 0;
-      background-color: #2d2d30;
-      border: 0;
-      font-size: 11px !important;
-      letter-spacing: 4px;
-      opacity: 0.9;
-  }
-  .navbar li a, .navbar .navbar-brand { 
-      color: #d5d5d5 !important;
-  }
-  .navbar-nav li a:hover {
-      color: #fff !important;
-  }
-  .navbar-nav li.active a {
-      color: #fff !important;
-      background-color: #29292c !important;
-  }
-  .navbar-default .navbar-toggle {
-      border-color: transparent;
-  }
-  .open .dropdown-toggle {
-      color: #fff;
-      background-color: #555 !important;
-  }
-  .dropdown-menu li a {
-      color: #000 !important;
-  }
-  .col-item
-	{
-    	border: 1px solid #E1E1E1;
-    	border-radius: 5px;
-    	background: #FFF;
-	}
-	.col-item .photo img
-	{
-    	margin: 0 auto;
-    	width: 100%;height:160%;
-	}
-
-  .dropdown-menu li a:hover {
-      background-color: red !important;
-  }
-  /*footer {
-      background-color: #2d2d30;
-      color: white;
-      font-size: 20px;
-      padding: 10px;
-  }
-  footer a {
-      color: #f5f5f5;
-  }
-  footer a:hover {
-      color: #777;
-      font-size: 20px;
-      padding: 10px;
-      border: 1px solid #70726F;
-      transition: all .5s ease;
-      text-decoration: none;
-  }*/ 
-
-  .crop {
-    width: 1700px;
-    height: 600px;
-    margin: auto;
     
-  }
-
-.crop img {
-    width: 1700px;
-    height: 600px;
-    margin-top: 45px;
-    margin-right: auto;
-    margin-left: auto;
-  }
-
-  footer {
-  background: black;
-  padding: 10px 0;
-  }
-  footer a {
-  color: #70726F;
-  font-size: 30px;
-  padding: 15px;
-  
-  transition: all .5s ease;
-  }
-  
-  footer a:hover {
-  color: red;padding: 20px;
-  }
-
-  .form-control {
-      border-radius: 0;
-  }
-  textarea {
-      resize: none;
-  }
-
-  
-  </style>
+</style>
 </head>
-<body >
+<body>
+      <nav class="navbar navbar-inverse ">
+      <div class="container-fluid">
+      <div class="navbar-header">
+      <a class="navbar-brand" href="#">Book Store</a>
+      </div>
+      <ul class="nav navbar-nav navbar-right">
+      <li><a class="navbar-brand" href="{% url 'login' %}">Back</a></li>
+      </ul>
+      </div>
+      </nav>
 
-<nav class="navbar navbar-default navbar-fixed-top">
+      <!--<nav class="navbar navbar-default navbar-fixed-top">
   <div class="container-fluid">
     <div class="navbar-header">
       <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
@@ -343,79 +87,15 @@ span.psw {
     </div>
     <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav navbar-right">
-        <li><button onclick="document.getElementById('id01').style.display='block'" style="width:auto;">Login</button></li>
+        <li><button onclick="location.href='{% url 'login' %}'" style="width:auto;">Back</button></li>
       </ul>
     </div>
   </div>
-</nav>
-
-
-<div id="id01" class="modal" >
-  {% if form.errors %}
-    <p style="color: red">Your username and password didn't match. Please try again.</p>
-  {% endif %}
-  <form class="modal-content animate" style="width: 40%" method="post">
-    {% csrf_token %}
-    <input type="hidden" name="next" value="{{ next }}" />
-    <br> <br>
-    <center>
-    {% for field in form %}
-      <p style="width: 60%">
-        {{ field.label_tag }}<br>
-        {{ field }}<br>
-        {% for error in field.errors %}
-          <p style="color: red">{{ error }}</p>
-        {% endfor %}
-        {% if field.help_text %}
-          <p><small style="color: grey">{{ field.help_text }}</small></p>
-        {% endif %}
-      </p>
-    {% endfor %}
-    <button type="submit">Log in</button>
-    <a href="{% url 'password_reset' %}">Forgot Password</a>
-    <br><br>
-    New User?<a href="{% url 'signup' %}">Sign up</a>
-  </center>
-  </form>
-  
- <!-- <form class="modal-content animate" style="width: 40%" action="/action_page.php">
-    
-<br><br>
-    <div class="container-fluid" >
-     <center>
-     <label><b>Username :</b></label>
-      <input type="text" placeholder="Enter Username" name="uname" required style="width: 80%">
-		<br>
-      <label><b>Password  :</b></label>
-      <input type="password" placeholder="Enter Password" name="psw" required style="width: 80%">
-      <center>  
-      <button type="submit" style="width: 50%">Login</button>
-      </center>
-      <input type="checkbox" checked="checked"> Remember me
-    </div>
-
-    <div class="container-fluid" style="background-color:#f1f1f1">
-      <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Cancel</button>
-      <span class="psw">Forgot <a href="#">password?</a></span>
-    </div>
-  </form> -->
-</div>
-
-<script>
-// Get the modal
-var modal = document.getElementById('id01');
-//var modal1= document.getElementById('id02');
-// When the user clicks anywhere outside of the modal, close it
-window.onclick = function(event) {
-    if (event.target == modal) {
-        modal.style.display = "none";
-    }
-}
-</script>
-
-<main>
+</nav>-->
+  <main>
       {% block content %}
       {% endblock %}
-    </main>
-  </body>
+  </main>
+        
+    </body>
 </html>
