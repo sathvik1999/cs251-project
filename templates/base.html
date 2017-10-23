@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-{% load static %}
+{% load staticfiles %}
 <html lang="en">
 <head>
     <title>Book Store</title>
@@ -214,7 +214,7 @@ html { height: 100%;}
 }
 
 .hamburger {
-  position: absolute;
+  position: fixed;
   top: 7px;  
   z-index: 999;
   display: block;
@@ -399,7 +399,7 @@ html { height: 100%;}
   opacity: 1;
   /*position:absolute;*/
 }
-.header ul {
+.header1 ul {
     list-style-type: none;
     margin: 0;
     padding: 0;
@@ -407,11 +407,11 @@ html { height: 100%;}
     background-color: #f7f4f4;
 }
 
-.header li {
+.header1 li {
     float: right;
 }
 
-.header li a {
+.header1 li a {
     display: inline-block;
     color: black !important;
     text-align: center;
@@ -420,26 +420,26 @@ html { height: 100%;}
     text-decoration: none;
 }
 
-.header-brand{
+.header1-brand{
   padding-left: 10px;
   padding-right: 300px;
   font-size: 14px !important;
   text-align: center;
 }
 
-.header li a:hover {
+.header1 li a:hover {
     color: orange !important;
 }
 
-.header li.active a {
+.header1 li.active a {
     color: orange !important;
     background-color: #29292c !important;
 }
 
-.header .dropdown-menu li a {
+.header1 .dropdown-menu li a {
       color: #000 !important;
 }
-.header .dropdown-menu li a:hover {
+.header1 .dropdown-menu li a:hover {
       background-color: red !important;
 }
 
@@ -613,26 +613,44 @@ html { height: 100%;}
 </head>
 
 
-<body id="myPage">
+<body id="myPage" data-spy="scroll" data-target=".sidebar-nav" data-offset="50">
   <div id="wrapper">
   <div id="page-content-wrapper">
         <div class="overlay"></div>
         <nav class="navbar navbar-inverse navbar-fixed-top" id="sidebar-wrapper" role="navigation">
             <ul class="nav sidebar-nav">
                 <li class="sidebar-brand"> <a href="{% url 'home' %}"> BOOK STORE </a> </li>
-                <li> <a href="#"> SUGGESTIONS </a> </li>
-                <li> <a href="{% url 'upfile' %}"> UPLOAD </a> </li>
+                {%block navbar-content %}
+                {% endblock %}
+                <!--<li> <a href="#suggestions"> SUGGESTIONS </a> </li>-->
+                <li class="dropdown">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown"> UPLOADS <span class="caret"></span></a>
+                  <ul class="dropdown-menu" role="menu">
+                    <li class="dropdown-header"></li>
+                    <li><a href="{% url 'upfile' %}">Upload New Book</a></li>
+                    <li><a href="#youruploads">Your Uploads</a></li>
+                  </ul>
+                </li>
                 <li class="dropdown">
                   <a href="#" class="dropdown-toggle" data-toggle="dropdown">COMMUNITIES <span class="caret"></span></a>
                   <ul class="dropdown-menu" role="menu">
                     <li class="dropdown-header"></li>
-                    <li><a href="#">Owned Communities</a></li>
+                    <!--<li><a href="#">Owned Communities</a></li>-->
+                    {%block navbar1-content %}
+                    {% endblock %}
                     <li><a href="#">Joined Communtites</a></li>
                     <li><a href="#">Other Communities</a></li>
-                    <li><a href="#">Create Communtites</a></li>
+                    <li><a href="{% url 'community' %}">Create Communtity</a></li>
                   </ul>
                 </li>
-                <li> <a href="{% url 'advertise' %}"> ADVERTISE </a> </li>
+                <li class="dropdown">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown"> ADVERTISE <span class="caret"></span></a>
+                  <ul class="dropdown-menu" role="menu">
+                    <li class="dropdown-header"></li>
+                    <li><a href="{% url 'advertise' %}">Advertise</a></li>
+                    <li><a href="#yourads">Your Ads</a></li>
+                  </ul>
+                </li>
                 <li> <a href="{% url 'notes' %}"> NOTIFICATIONS </a> </li>
                 <li> <a href="{% url 'search' %}"> SEARCH </a> </li>
                 <li class="dropdown">
@@ -650,7 +668,7 @@ html { height: 100%;}
           <span class="hamb-middle"></span>
         <span class="hamb-bottom"></span>
         </button>
-        <div class="header">
+        <div class="header1">
            <ul>
             <li><a href="#"><span class="glyphicon glyphicon-search"></span></a></li>
             <li><a href="{% url 'logout' %}">LOG OUT</a></li>
@@ -1161,8 +1179,39 @@ html { height: 100%;}
       {% block content %}
       {% endblock %}
     </main>
+    {% block extra_body %}{% endblock %}
   </div>
 </div>
+<script>
+$(document).ready(function(){
+  // Initialize Tooltip
+  $('[data-toggle="tooltip"]').tooltip(); 
+  
+  // Add smooth scrolling to all links in navbar + footer link
+  $(".navbar a, footer a[href='#myPage']").on('click', function(event) {
+
+    // Make sure this.hash has a value before overriding default behavior
+    if (this.hash !== "") {
+
+      // Prevent default anchor click behavior
+      event.preventDefault();
+
+      // Store hash
+      var hash = this.hash;
+
+      // Using jQuery's animate() method to add smooth page scroll
+      // The optional number (900) specifies the number of milliseconds it takes to scroll to the specified area
+      $('html, body').animate({
+        scrollTop: $(hash).offset().top
+      }, 900, function(){
+   
+        // Add hash (#) to URL when done scrolling (default click behavior)
+        window.location.hash = hash;
+      });
+    } // End if
+  });
+})
+</script>
+
 </body>
 </html>
-

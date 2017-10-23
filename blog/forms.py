@@ -7,7 +7,7 @@ from .models import Interest,Document,Rate,Community,Advertise,Profile
 class ProfileForm(forms.ModelForm):
     class Meta:
         model = Profile
-        fields = ('picture',)
+        fields = ('picture','first_name', 'last_name', 'email',)
 
 class SignUpForm(UserCreationForm):
     first_name = forms.CharField(max_length=30, required=False)

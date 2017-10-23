@@ -1,16 +1,13 @@
 {% extends 'base.html' %}
-
+{% block navbar-content %}
+<li> <a href="#suggestions"> SUGGESTIONS </a> </li>
+{% endblock %}
+{% block navbar1-content %}
+<li><a href="#owned">Owned Communities</a></li>
+{% endblock %}
 {% block content %}
-  <h2>Welcome, {{ user.get_full_name }} !</h2>
-  <p>Your email address: {{ user.email }}</p>
-  <img src="{{p.picture.url}}" alt="" style="width:100px;height:100px;"><br>
-  <a href="{% url 'settings' %}">Settings</a><br>
-  <a href="{% url 'test' %}">test</a><br>
-  <a href="{% url 'upfile' %}">upfile</a><br>
-  <a href="{% url 'search' %}">search</a><br>
-  <a href="{% url 'community' %}">create community</a><br>
-  <a href="{% url 'advertise' %}">advertise</a><br>
-  <a href="{% url 'messages' pk=user.pk %}">messages</a><br>
+<img src="{{user.profile.picture.url}}" alt="" style="width:100px;height:100px;"><br>
+<div id="youruploads">
 <h2>your uploads</h2>
 <div id="menu">
 <ul>
@@ -27,7 +24,11 @@
 {% endfor %}
 </ul>
 </div>
+</div>
+<div id="yourads">
 <h2>your ads</h2>
+<div id="menu">
+<ul>
 {% for object in ads %}
     <div>
         <p>
@@ -39,6 +40,9 @@
         </p>
     </div>
 {% endfor %}
+</ul>
+</div>
+</div>
 <h2>read requests</h2>
 {% for doc,li in rplist %}
   {% for l in li %}
@@ -58,7 +62,7 @@
     <a href="{% url 'genre' pk=i %}">{{i}}</a>
         <br>
 {% endfor %}
-
+<div id="suggestions">
 <h2>suggestions</h2>
 <div id="menu" >
 <ul >
@@ -75,14 +79,16 @@
 {% endfor %}
 </ul>
 </div>
+</div>
 <br>
 <a href="{% url 'notes' %}">Notifications</a><br>
-  
+<div id="owned">
 <h2>owned communities</h2>
 {% for c,count in opclist %}
     name: <a href="{% url 'cpage' pk=c.pk %}">{{ c.name }}</a>
     requests: {{count}}
 {% endfor %}
+</div>
 <h2>joined communities</h2>
 {% for c in jcom %}
     name: <a href="{% url 'cpage' pk=c.pk %}">{{ c.name }}</a>

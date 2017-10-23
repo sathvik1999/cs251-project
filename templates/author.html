@@ -1,6 +1,10 @@
 {% extends 'base.html' %}
 
 {% block content %}
+<br> <br>
+<div id="menu">
+<ul>
+
   {% for object in docs %}
     <li>
         <div>
@@ -10,10 +14,11 @@
           genre: <a href="{% url 'genre' pk=object.genre %}">{{object.genre}}</a><br>
           title: <a href="{% url 'bookpage' pk=object.pk %}">{{ object.title }}</a>
         </p>
-          rating: {{object.rate1}}
+          rating: {{object.rate1}}<br>
           no of ratings: {{object.no_ratings}}<br> 
         </div>
     </li>
 {% endfor %}
-
+</ul>
+</div>
 {% endblock %}

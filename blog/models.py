@@ -8,6 +8,10 @@ from django.dispatch import receiver
 class Profile(models.Model):
     user = models.OneToOneField('auth.User', on_delete=models.CASCADE)
     picture=models.ImageField(upload_to='images/',default = 'pic_folder/None/no-img.jpg')
+    first_name = models.CharField(max_length=30)
+    last_name = models.CharField(max_length=30)
+    email = models.EmailField(max_length=254)
+    
     #published_date = models.DateTimeField(blank=True, null=True)
     
 class Interest(models.Model):

@@ -6,5 +6,12 @@
     <li> <a href="{% url 'uploader' pk=doc.uploader %}">{{doc.uploader}}</a> has uploaded <a href="{% url 'bookpage' pk=doc.pk %}">{{doc.title }}</a>
 {% endfor %}
 </ul>
-<p><a href="{% url 'home' %}">Return to home</a></p>
+<h2>read requests</h2>
+{% for doc,li in rplist %}
+  {% for l in li %}
+  <a href="{% url 'bookpage' pk=doc.pk %}">{{ doc.title }}</a>
+  {{l.username}}<a href="{% url 'acceptread' pk=l.pk pk1=doc.pk %}">accept</a>
+  {% endfor %}
+{% endfor %}
+
 {% endblock %}

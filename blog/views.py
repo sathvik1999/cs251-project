@@ -17,7 +17,6 @@ def home(request):
     ads = Advertise.objects.order_by('published_date').filter(user=request.user)
     interest = Interest.objects.get(user=request.user)
     choices=['fiction','fear','fear1','fear2','fear3']
-    p = Profile.objects.get(user=request.user)#.order_by('-published_date').first()
     doc=Document.objects.order_by('published_date').filter(genre__in=interest.my_field,searchshow=True).exclude(user=request.user)
     Communities=Community.objects.all().exclude(admin=request.user)
     communities=[c for c in Communities]
@@ -28,7 +27,7 @@ def home(request):
     jcom=Join.objects.get(user=request.user).jlist.all()
     readreq=Readpending.objects.filter(user=request.user)
     rplist=map(lambda x:[x.doc,x.rplist.all()],readreq)
-    return render(request, 'home.html',{'documents': documents,'ads':ads,'interest':interest,'doc':doc,'jpclist':jpclist,'jcom':jcom,'opclist':opclist,'rplist':rplist,'p':p,'choices':choices})
+    return render(request, 'home.html',{'documents': documents,'ads':ads,'interest':interest,'doc':doc,'jpclist':jpclist,'jcom':jcom,'opclist':opclist,'rplist':rplist,'choices':choices})
 
 def signup(request):
     if request.method == 'POST':
@@ -48,15 +47,19 @@ def signup(request):
         form = SignUpForm()
     return render(request, 'signup.html', {'form': form})
 
-def propic(request):
+def editprofile(request):
     if request.method == 'POST':
         form = ProfileForm(request.POST, request.FILES,instance=request.user.profile)
         if form.is_valid():
             form.save()
+            request.user.email=form.cleaned_data.get('email',None)
+            request.user.first_name=form.cleaned_data.get('first_name',None)
+            request.user.last_name=form.cleaned_data.get('last_name',None)
+            request.user.save()
             return redirect('settings')
     else:
         form = ProfileForm(instance=request.user.profile)
-    return render(request, 'propic.html', {'form': form})
+    return render(request, 'editprofile.html', {'form': form})
 
 def interests(request):
     if request.method == "POST":
@@ -107,7 +110,10 @@ def notes(request):
     f=Follow.objects.get(user=request.user)
     fl=f.flist.all()
     d=Document.objects.filter(user__in=fl).order_by('-published_date')
-    return render(request,'notes.html',{'fl':fl,'d':d})
+    readreq=Readpending.objects.filter(user=request.user)
+    rplist=map(lambda x:[x.doc,x.rplist.all()],readreq)
+    
+    return render(request,'notes.html',{'fl':fl,'d':d,'rplist':rplist})
 
 def search(request):
     Document_list = Document.objects.all()
@@ -314,7 +320,7 @@ def acceptread(request, pk,pk1):
     doc.rmembers.add(u)
     doc.save()
     Readpending.objects.get(user=request.user,doc=doc).rplist.remove(u)
-    return redirect('home')
+    return redirect('notes')
 
 def upfileinc(request,pk):
     com=Community.objects.get(pk=pk)

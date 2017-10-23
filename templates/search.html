@@ -1,11 +1,36 @@
 {% extends 'base.html' %}
-
-{% block content %}
-  <form method="post" enctype="multipart/form-data">
+<!--<form method="post" enctype="multipart/form-data">
     {% csrf_token %}
     {{ filter.form.as_p }}
     <button type="submit">Search</button>
-  </form>
+  </form>-->
+{% block content %}
+  <div class="container">
+            <h2>Search Books</h2>
+            <div style="width:50%">
+                <form method="post" enctype="multipart/form-data">
+                    {%csrf_token%}
+                    {% for error in filter.form.non_field_errors %}
+                    <div class="form-group has-errors text-danger small">
+                        {{error}}
+                    </div>
+                    {% endfor %}
+                    {% for field in filter.form %}
+                    <div class="form-group has-errors text-danger small">
+                        {{field.errors}}
+                    </div>
+                    <div class="form-group has-errors text-danger small">
+                    </div>
+                    <div class="form-group">
+                      {{ field.label_tag }}<br>
+                        {{field}}
+                    </div>
+                    {% endfor %}
+                    <button class="btn btn-primary" type="submit" style="width:30%">Search</button>
+            </div>
+            </form>
+        </div>
+<br> <br>
 {% if le == 0 %}
     not yet searched
 {% elif filter.qs.count == 0 %}
@@ -34,5 +59,4 @@
   	</ul>
   </div>
 {% endif %}
-<p><a href="{% url 'home' %}">Return to home</a></p>
 {% endblock %}

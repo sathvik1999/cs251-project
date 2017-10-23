@@ -1,10 +1,8 @@
-{% extends "base1.html" %}
+{% extends "base.html" %}
 
-{% block title %}Chat box{% endblock %}
-{% block header_text %}Chat Box{% endblock %}
 
 {% block content %}
-
+    <h2> Messages </h2>
     <ul class="rooms">
         {% for room in rooms %}
             <li class="room-link" data-room-id="{{ room.id }}">{{ room }}</li>
