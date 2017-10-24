@@ -26,7 +26,7 @@
             {% else %}
             <a href="{% url 'prequest' pk=doc.pk %}">send request</a><br>
             {% endif %}
-            <a href="{% url 'chat' pk1=user.pk pk2=doc.user.pk %}">chat</a><br>
+            <a href="http://127.0.0.1:8000/chat/dialogs/{{doc.user.username}}">chat</a><br>
         </p>
         {% endif %}
         rating: {{r1}}<br> no of ratings {{t}}

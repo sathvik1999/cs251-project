@@ -12,6 +12,8 @@ urlpatterns = [
          name='login'),
     url(r'^logout/$', auth_views.logout, {'next_page': 'login'}, name='logout'),
     url(r'^signup/$', entry_views.signup, name='signup'),
+    #url(r'^chat/dialogs/(?P<pk>\w+)/$', entry_views.chat, name='chat'),
+    
     url(r'^login/interests/$',entry_views.interests,name='interests'),
     url(r'^login/settings/$',entry_views.settings,name='settings'),
     url(r'^login/upfile/$',	entry_views.upfile,name='upfile'),
