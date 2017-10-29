@@ -5,6 +5,7 @@
     <button type="submit">Search</button>
   </form>-->
 {% block content %}
+<a href="{% url 'searchad' %}"> SEARCH-AD </a>
   <div class="container">
             <h2>Search Books</h2>
             <div style="width:50%">
@@ -30,6 +31,8 @@
             </div>
             </form>
         </div>
+}
+}
 <br> <br>
 {% if le == 0 %}
     not yet searched
@@ -50,7 +53,7 @@
           uploader: <a href="{% url 'uploader' pk=doc.uploader %}">{{doc.uploader}}</a>
         </p>
         	<a href="{{doc.document.url}}">read</a><br>
-        	rating: {{doc.rate1}}<br> 
+        	rating: {{doc.rating}}<br> 
         	no of ratings: {{doc.no_ratings}}
   			</div>
     	</li>

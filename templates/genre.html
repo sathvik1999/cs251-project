@@ -10,7 +10,7 @@
           genre: <a href="{% url 'genre' pk=object.genre %}">{{object.genre}}</a><br>
           title: <a href="{% url 'bookpage' pk=object.pk %}">{{ object.title }}</a><br>
           uploader: <a href="{% url 'uploader' pk=object.uploader %}">{{object.uploader}}</a><br>
-          rating: {{object.rate1}}<br>
+          rating: {{object.rating}}<br>
           no of ratings: {{object.no_ratings}}<br> 
     </li>
 {% endfor %}

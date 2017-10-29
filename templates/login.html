@@ -1,29 +1,428 @@
 <!DOCTYPE html>
-{% load static %}
+{%load static %}
 <html lang="en">
 <head>
-  <!-- Theme Made By www.w3schools.com - No Copyright 
-  <title>Bootstrap Theme The Band</title>-->
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="{% static "css/bootstrap.css" %}">
-  <link rel="stylesheet" href="{% static "css/font-awesome.css" %}">
-  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css" rel="stylesheet"/>
-  <link rel="stylesheet" href="{% static "js/jquery.js" %}">
+    <title>Book Store</title>
+    <meta http-equiv="content-type" content="text/html">
+    <meta charset="utf-8">
+    <meta name="description" content="Book Store">
+    <meta name="keywords"    content="Book Store,Book,Store,Author,Community">
+    <meta name="author"      content="The Brogrammers">
+    <meta name="viewport"    content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css">
-  <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" type="text/css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-  <script src="{% static "js/bootstrap.js" %}"></script>
-  <style>
-  body {
-      font: 400 15px/1.8 Lato, sans-serif;
-      color: #777;
+    <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,300,600,400italic,700'rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" type="text/css">
+    <style>
+      body {
+    position: relative;
+    overflow-x: hidden;
+}
+body,
+html { height: 100%;}
+.nav .open > a, 
+.nav .open > a:hover, 
+.nav .open > a:focus {background-color: transparent;}
+
+#myext {
+  
+}
+
+#wrapper {
+    padding-left: 0;
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+}
+
+#wrapper.toggled {
+    padding-left: 220px;
+}
+
+#sidebar-wrapper {
+    z-index: 1000;
+    left: 220px;
+    width: 0;
+    height: 100%;
+    margin-left: -220px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    background: #1a1a1a;
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+}
+
+#sidebar-wrapper::-webkit-scrollbar {
+  display: none;
+}
+
+#wrapper.toggled #sidebar-wrapper {
+    width: 220px;
+}
+
+#page-content-wrapper {
+    width: 100%;
+    padding-top: 0px;
+}
+
+#wrapper.toggled #page-content-wrapper {
+    position: absolute;
+    margin-right: -220px;
+    width: 100%;
+}
+.sidebar-nav {
+    position: absolute;
+    top: 0;
+    width: 220px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.sidebar-nav li {
+    position: relative; 
+    line-height: 20px;
+    display: inline-block;
+    width: 100%;
+}
+
+.sidebar-nav li:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    height: 100%;
+    width: 3px;
+    background-color: #1c1c1c !important;
+    -webkit-transition: width .2s ease-in;
+      -moz-transition:  width .2s ease-in;
+       -ms-transition:  width .2s ease-in;
+            transition: width .2s ease-in;
+
+}
+.sidebar-nav li:first-child a {
+    color: #fff !important;
+    background-color: #1a1a1a !important;
+}
+.sidebar-nav li:nth-child(2):before {
+    background-color: #ec1b5a !important;   
+}
+.sidebar-nav li:nth-child(3):before {
+    background-color: #79aefe !important;   
+}
+.sidebar-nav li:nth-child(4):before {
+    background-color: #314190 !important;   
+}
+.sidebar-nav li:nth-child(5):before {
+    background-color: #279636 !important;   
+}
+.sidebar-nav li:nth-child(6):before {
+    background-color: #7d5d81!important;   
+}
+.sidebar-nav li:nth-child(7):before {
+    background-color: #ead24c !important;   
+}
+.sidebar-nav li:nth-child(8):before {
+    background-color: #2d2366 !important;   
+}
+.sidebar-nav li:nth-child(9):before {
+    background-color: #35acdf !important;   
+}
+.sidebar-nav li:nth-child(10):before {
+    background-color: #35acdf !important;   
+}
+.sidebar-nav li:nth-child(11):before {
+    background-color: #35acdf !important;   
+}
+
+.sidebar-nav li:hover:before,
+.sidebar-nav li.open:hover:before {
+    width: 100%;
+    -webkit-transition: width .2s ease-in;
+      -moz-transition:  width .2s ease-in;
+       -ms-transition:  width .2s ease-in;
+            transition: width .2s ease-in;
+
+}
+
+.sidebar-nav li a {
+    display: block;
+    color: #ddd !important;
+    text-decoration: none;
+    padding: 10px 15px 10px 30px;    
+}
+
+.sidebar-nav li a:hover,
+.sidebar-nav li a:active,
+.sidebar-nav li a:focus,
+.sidebar-nav li.open a:hover,
+.sidebar-nav li.open a:active,
+.sidebar-nav li.open a:focus{
+    color: #fff !important;
+    text-decoration: none;
+    background-color: transparent !important;
+}
+
+.sidebar-nav > .sidebar-brand {
+    height: 65px;
+    font-size: 20px;
+    line-height: 44px;
+}
+.sidebar-nav .dropdown-menu {
+    position: relative;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    border-radius: 0;
+    border: none;
+    background-color: #222 !important;
+    box-shadow: none;
+}
+
+.hamburger {
+  position: absolute;
+  top: 7px;  
+  z-index: 999;
+  display: block;
+  width: 32px;
+  height: 32px;
+  margin-left: 8px;
+  background: transparent !important;
+  border: none;
+}
+.hamburger:hover,
+.hamburger:focus,
+.hamburger:active {
+  outline: none;
+}
+.hamburger.is-closed:before {
+  content: '';
+  display: block;
+  width: 100px;
+  font-size: 14px;
+  color: #fff !important;
+  line-height: 32px;
+  text-align: center;
+  opacity: 0;
+  -webkit-transform: translate3d(0,0,0);
+  -webkit-transition: all .35s ease-in-out;
+}
+.hamburger.is-closed:hover:before {
+  opacity: 1;
+  display: block;
+  -webkit-transform: translate3d(-100px,0,0);
+  -webkit-transition: all .35s ease-in-out;
+}
+
+.hamburger.is-closed .hamb-top,
+.hamburger.is-closed .hamb-middle,
+.hamburger.is-closed .hamb-bottom,
+.hamburger.is-open .hamb-top,
+.hamburger.is-open .hamb-middle,
+.hamburger.is-open .hamb-bottom {
+  position: absolute;
+  left: 0;
+  height: 4px;
+  width: 100%;
+}
+.hamburger.is-closed .hamb-top,
+.hamburger.is-closed .hamb-middle,
+.hamburger.is-closed .hamb-bottom {
+  background-color: #1a1a1a;
+}
+.hamburger.is-closed .hamb-top { 
+  top: 5px; 
+  -webkit-transition: all .35s ease-in-out;
+}
+.hamburger.is-closed .hamb-middle {
+  top: 50%;
+  margin-top: -2px;
+}
+.hamburger.is-closed .hamb-bottom {
+  bottom: 5px;  
+  -webkit-transition: all .35s ease-in-out;
+}
+
+.hamburger.is-closed:hover .hamb-top {
+  top: 0;
+  -webkit-transition: all .35s ease-in-out;
+}
+.hamburger.is-closed:hover .hamb-bottom {
+  bottom: 0;
+  -webkit-transition: all .35s ease-in-out;
+}
+.hamburger.is-open .hamb-top,
+.hamburger.is-open .hamb-middle,
+.hamburger.is-open .hamb-bottom {
+  background-color: #1a1a1a;
+}
+.hamburger.is-open .hamb-top,
+.hamburger.is-open .hamb-bottom {
+  top: 50%;
+  margin-top: -2px;  
+}
+.hamburger.is-open .hamb-top { 
+  -webkit-transform: rotate(45deg);
+  -webkit-transition: -webkit-transform .2s cubic-bezier(.73,1,.28,.08);
+}
+.hamburger.is-open .hamb-middle { display: none; }
+.hamburger.is-open .hamb-bottom {
+  -webkit-transform: rotate(-45deg);
+  -webkit-transition: -webkit-transform .2s cubic-bezier(.73,1,.28,.08);
+}
+.hamburger.is-open:before {
+  content: '';
+  display: block;
+  width: 100px;
+  font-size: 14px;
+  color: #fff;
+  line-height: 32px;
+  text-align: center;
+  opacity: 0;
+  -webkit-transform: translate3d(0,0,0);
+  -webkit-transition: all .35s ease-in-out;
+}
+.hamburger.is-open:hover:before {
+  opacity: 1;
+  display: block;
+  -webkit-transform: translate3d(-100px,0,0);
+  -webkit-transition: all .35s ease-in-out;
+}
+
+.overlay {
+    position: fixed;
+    display: none;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(250,250,250,.8);
+    z-index: 1;
+}
+
+/* -------------------------------- Start of Carousel styling --------------------------- */
+  .carousel {
+    padding-top:0px;
+    margin-top: -10px;
   }
-  
-  /* login form*/
-  
-  /* Full-width input fields */
+  .carousel .item {
+    height: 850px;
+  }
+  .carousel-inner img {
+      width: 100%;
+      margin: auto;
+  }
+  .carousel-caption h3 {
+      color: #fff !important;
+  }
+.carousel-fade .carousel-inner .item {
+  opacity: 0;
+  -webkit-transition-property: opacity;
+  -moz-transition-property: opacity;
+  -o-transition-property: opacity;
+  transition-property: opacity;
+}
+  .carousel-fade .carousel-inner .active {
+    opacity: 1 !important;
+  }
+  .carousel-fade .carousel-inner .active.left,
+  .carousel-fade .carousel-inner .active.right {
+    left: 0;
+    opacity: 0;
+    z-index: 1;
+  }
+  .carousel-fade .carousel-inner .next.left,
+  .carousel-fade .carousel-inner .prev.right {
+    opacity: 1;
+  }
+  .carousel-fade .carousel-control {
+    z-index: 2;
+  }
+
+  @media(max-width: 600px) {
+    .carousel-caption {
+      display: none; 
+    }
+  }
+
+/* -----------------------------------  End of Carousel styling  ------------------------------------------ */
+
+/* -----------------------------------  Start of Navbar top styling  ------------------------------------------ */
+.header{
+  margin-top: 0px;
+
+  height: 130%;
+  width:100%;
+  top: 0;
+  bottom:10px;
+  padding-bottom: 10px;
+  font-family: Montserrat, sans-serif;
+  border: 0;
+  font-size: 11px !important;
+  letter-spacing: 4px;
+  opacity: 1;
+
+}
+.header ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #f7f4f4;
+}
+
+.header li {
+    float: right;
+}
+
+.header li a {
+    display: inline-block;
+    color: black !important;
+    text-align: center;
+    padding: 14px 16px;
+    margin-right: 20px;
+    text-decoration: none;
+}
+
+.header-brand{
+  padding-left: 0px;
+  padding-right: 70%;
+  font-size: 14px !important;
+  text-align: center;
+}
+
+.header li a:hover {
+    color: orange !important;
+}
+
+.header li.active a {
+    color: orange !important;
+    background-color: #29292c !important;
+}
+
+.header .dropdown-menu li a {
+      color: #000 !important;
+}
+.header .dropdown-menu li a:hover {
+      background-color: red !important;
+}
+
+/* -----------------------------------  End of Navbar top Styling  ------------------------------------------ */
+
+/* ------------------------------------ Start of Login Form ---------------------------------------*/
 input[type=text], input[type=password] {
     width: 100%;
     padding: 12px 20px;
@@ -35,8 +434,8 @@ input[type=text], input[type=password] {
 
 /* Set a style for all buttons */
 button {
-	
-   	  font-family: Montserrat, sans-serif;
+  
+      font-family: Montserrat, sans-serif;
       margin-bottom: 0;
       padding:15px;
       background-color: #2d2d30;
@@ -138,211 +537,178 @@ span.psw {
     }
 }
 
- /*end login form*/
-  h3, h4 {
-      margin: 10px 0 30px 0;
-      letter-spacing: 10px;      
-      font-size: 20px;
-      color: #111;
-  }
-  .container {
-      padding: 80px 120px;
-  }
-  .person {
-      border: 10px solid transparent;
-      margin-bottom: 25px;
-      width: 80%;
-      height: 80%;
-      
-  }
-  .person:hover {
-      border-color: #f1f1f1;
-  }
-  .carousel-inner img {
-      width:1700px;
-      height:500px; /* Set width to 100% */
-      margin-top: 45px;
-      margin-left: auto;
-      margin-right: auto;
-  }
-  .carousel-caption h3 {
-      color: #fff !important;
-  }
-  @media (max-width: 600px) {
-    .carousel-caption {
-      display: none; /* Hide the carousel text when the screen is less than 600 pixels wide */
-    }
-  }
-  .bg-1 {
-      background: #2d2d30;
-      color: #bdbdbd;
-  }
-  .bg-1 h3 {color: #fff;}
-  .bg-1 p {font-style: italic;}
-  .list-group-item:first-child {
-      border-top-right-radius: 0;
-      border-top-left-radius: 0;
-  }
-  .list-group-item:last-child {
-      border-bottom-right-radius: 0;
-      border-bottom-left-radius: 0;
-  }
-  .thumbnail {
-      padding: 0 0 15px 0;
-      border: none;
-      border-radius: 0;
-  }
-  .thumbnail p {
-      margin-top: 15px;
-      color: #555;
-  }
-  .btn {
-      padding: 10px 20px;
-      background-color: #333;
-      color: #f1f1f1;
-      border-radius: 0;
-      transition: .2s;
-  }
-  .btn:hover, .btn:focus {
-      border: 1px solid #333;
-      background-color: #fff;
-      color: #000;
-  }
-  .modal-header, h4, .close {
-      background-color: #333;
-      color: #fff !important;
-      text-align: center;
-      font-size: 30px;
-  }
-  .modal-header, .modal-body {
-      padding: 40px 50px;
-  }
-  /*.nav-tabs li a {
-      color: #777;
-  }
-  #googleMap {
-      width: 100%;
-      height: 400px;
-      -webkit-filter: grayscale(100%);
-      filter: grayscale(100%);
-  }  
-  .navbar {
-      font-family: Montserrat, sans-serif;
-      margin-bottom: 0;
-      background-color: #2d2d30;
-      border: 0;
-      font-size: 11px !important;
-      letter-spacing: 4px;
-      opacity: 0.9;
-  }
-  .navbar li a, .navbar .navbar-brand { 
-      color: #d5d5d5 !important;
-  }
-  .navbar-nav li a:hover {
-      color: #fff !important;
-  }
-  .navbar-nav li.active a {
-      color: #fff !important;
-      background-color: #29292c !important;
-  }
-  .navbar-default .navbar-toggle {
-      border-color: transparent;
-  }*/
-  .open .dropdown-toggle {
-      color: #fff;
-      background-color: #555 !important;
-  }
-  .dropdown-menu li a {
-      color: #000 !important;
-  }
-  .col-item
-	{
-    	border: 1px solid #E1E1E1;
-    	border-radius: 5px;
-    	background: #FFF;
-	}
-	.col-item .photo img
-	{
-    	margin: 0 auto;
-    	width: 100%;height:160%;
-	}
+/* ------------------------------------ End Of Login Form ---------------------------------------*/
 
-  .dropdown-menu li a:hover {
-      background-color: red !important;
-  }
-  /*footer {
-      background-color: #2d2d30;
-      color: white;
-      font-size: 20px;
-      padding: 10px;
-  }
-  footer a {
-      color: #f5f5f5;
-  }
-  footer a:hover {
-      color: #777;
-      font-size: 20px;
-      padding: 10px;
-      border: 1px solid #70726F;
-      transition: all .5s ease;
-      text-decoration: none;
-  }*/ 
+/* ------------------------------------ Start of Book Carousel Styling ---------------------------------------*/
 
-  .crop {
-    width: 1700px;
-    height: 600px;
-    margin: auto;
-    
-  }
+.col-item
+{
+    border: 1px solid #E1E1E1;
+    border-radius: 5px;
+    background: #FFF;
+}
+.col-item .photo img
+{
+    margin: 0 auto;
+    width: 100%;
+}
 
-.crop img {
-    width: 1700px;
-    height: 600px;
-    margin-top: 45px;
-    margin-right: auto;
-    margin-left: auto;
-  }
+.col-item .info
+{
+    padding: 10px;
+    border-radius: 0 0 5px 5px;
+    margin-top: 1px;
+}
 
-  footer {
-  background: black;
-  padding: 10px 0;
-  }
-  footer a {
-  color: #70726F;
-  font-size: 30px;
-  padding: 15px;
-  
-  transition: all .5s ease;
+.col-item:hover .info {
+    background-color: #F5F5DC;
+}
+.col-item .price
+{
+    /*width: 50%;*/
+    float: left;
+    margin-top: 5px;
+}
+
+.col-item .price h5
+{
+    line-height: 20px;
+    margin: 0;
+}
+
+.price-text-color
+{
+    color: #219FD1;
+}
+
+.col-item .info .rating
+{
+    color: #777;
+}
+
+.col-item .rating
+{
+    /*width: 50%;*/
+    float: left;
+    font-size: 17px;
+    text-align: right;
+    line-height: 52px;
+    margin-bottom: 10px;
+    height: 52px;
+}
+
+.col-item .separator
+{
+    border-top: 1px solid #E1E1E1;
+}
+
+.clear-left
+{
+    clear: left;
+}
+
+.col-item .separator p
+{
+    line-height: 20px;
+    margin-bottom: 0;
+    margin-top: 10px;
+    text-align: center;
+}
+
+.col-item .separator p i
+{
+    margin-right: 5px;
+}
+.col-item .btn-add
+{
+    width: 50%;
+    float: left;
+}
+
+.col-item .btn-add
+{
+    border-right: 1px solid #E1E1E1;
+}
+
+.col-item .btn-details
+{
+    width: 50%;
+    float: left;
+    padding-left: 10px;
+}
+.controls
+{
+    margin-top: 20px;
+}
+[data-slide="prev"]
+{
+    margin-right: 10px;
+}
+
+/* ------------------------------------ End of Book Carousel Styling ---------------------------------------*/
+
+    </style>
+    <script type="text/javascript">
+      $(document).ready(function () {
+  var trigger = $('.hamburger'),
+      overlay = $('.overlay'),
+     isClosed = false;
+
+    trigger.click(function () {
+      hamburger_cross();      
+    });
+
+    function hamburger_cross() {
+
+      if (isClosed === true) {          
+        overlay.hide();
+        trigger.removeClass('is-open');
+        trigger.addClass('is-closed');
+        isClosed = false;
+      } else {   
+        overlay.show();
+        trigger.removeClass('is-closed');
+        trigger.addClass('is-open');
+        isClosed = true;
+      }
   }
   
-  footer a:hover {
-  color: red;padding: 20px;
-  }
-
-  .form-control {
-      border-radius: 0;
-  }
-  textarea {
-      resize: none;
-  }
-
-  
-  </style>
+  $('[data-toggle="offcanvas"]').click(function () {
+        $('#wrapper').toggleClass('toggled');
+  });  
+});
+    </script>
 </head>
-<body >
 
-<nav class="navbar navbar-inverse navbar-fixed-top">
-      <div class="container-fluid">
-      <div class="navbar-header">
-      <a class="navbar-brand" href="#">Book Store</a>
-      </div>
-      <ul class="nav navbar-nav navbar-right">
-      <li><button onclick="document.getElementById('id01').style.display='block'" style="width:auto;">Login</button></li>
-      </ul>
-      </div>
-      </nav>
 
-<div id="id01" class="modal" >
+<body id="myPage">
+  <div id="wrapper">
+  <div id="page-content-wrapper">
+        <div class="overlay"></div>
+        <nav class="navbar navbar-inverse navbar-fixed-top" id="sidebar-wrapper" role="navigation">
+            <ul class="nav sidebar-nav">
+                <li class="sidebar-brand"> <a href="#myPage"> BOOK STORE </a> </li>
+                <li> <a href="#"> UPLOAD </a> </li>
+                <li> <a href="#"> ADVERTISE </a> </li>
+                <li> <a href="#"> NOTIFICATIONS </a> </li>
+                <li> <a href="#"> SEARCH </a> </li>
+            </ul>
+        </nav>
+        <button type="button" class="hamburger is-closed" data-toggle="offcanvas">
+                <span class="hamb-top"></span>
+          <span class="hamb-middle"></span>
+        <span class="hamb-bottom"></span>
+        </button>
+        <div class="header">
+           <ul>
+            <li><a href="#"><span class="glyphicon glyphicon-search"></span></a></li>
+            <li><button onclick="document.getElementById('id01').style.display='block'" style="width:auto;">Login</button></li>
+            <li class="header-brand" style="padding-left: 0px"><a href="#myPage">BOOK STORE</a></li>
+          </ul>
+    </div>
+
+
+    <div id="id01" class="modal" >
   {% if form.errors %}
     <p style="color: red">Your username and password didn't match. Please try again.</p>
   {% endif %}
@@ -370,51 +736,11 @@ span.psw {
   </center>
   </form>
   </div>
- <!-- <form class="modal-content animate" style="width: 40%" action="/action_page.php">
-    
-<br><br>
-    <div class="container-fluid" >
-     <center>
-     <label><b>Username :</b></label>
-      <input type="text" placeholder="Enter Username" name="uname" required style="width: 80%">
-		<br>
-      <label><b>Password  :</b></label>
-      <input type="password" placeholder="Enter Password" name="psw" required style="width: 80%">
-      <center>  
-      <button type="submit" style="width: 50%">Login</button>
-      </center>
-      <input type="checkbox" checked="checked"> Remember me
-    </div>
 
-    <div class="container-fluid" style="background-color:#f1f1f1">
-      <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Cancel</button>
-      <span class="psw">Forgot <a href="#">password?</a></span>
-    </div>
-  </form> 
-
-<div id="id02" class="modal" >
-  <form class="modal-content animate" style="width: 40%" method="post">
-    {% csrf_token %}
-    <center>
-    {% for field in form1 %}
-      <p style="width: 40%">
-        {{ field.label_tag }} {{ field }}
-        {% if field.help_text %}
-          <small style="color: grey">{{ field.help_text }}</small>
-        {% endif %}
-        {% for error in field.errors %}
-          <p style="color: red">{{ error }}</p>
-        {% endfor %}
-      </p>
-    {% endfor %}
-    <button type="submit">Sign up</button>
-  </center>
-  </form>
-</div>
--->
 <script>
 // Get the modal
 var modal = document.getElementById('id01');
+
 // When the user clicks anywhere outside of the modal, close it
 window.onclick = function(event) {
     if (event.target == modal) {
@@ -423,359 +749,441 @@ window.onclick = function(event) {
 }
 </script>
 
-<div id="myCarousel" class="carousel slide hidden-xs" data-ride="carousel" >
-    <!-- Indicators -->
-    <ol class="carousel-indicators">
-      <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-      <li data-target="#myCarousel" data-slide-to="1" ></li>
-    </ol>
 
-    <!-- Wrapper for slides -->
-    <div class="carousel-inner" role="listbox">
-      <div class="item active crop" >
-        <img src="{% static "images/Secrets-of-Nagas.jpg" %}" alt="New York" >
-        <div class="carousel-caption">
-          <h3>New York</h3>
-          <p>The atmosphere in New York is lorem ipsum.</p>
-        </div>      
-      </div>
-
-      <div class="item crop" >
-        <img src="{% static "images/shiva.jpg" %}" alt="Chicago" width="500px" height="100px">
-        <div class="carousel-caption">
-          <h3>Chicago</h3>
-          <p>Thank you, Chicago - A night we won't forget.</p>
-        </div>      
-      </div>
     
+    <div id="myCarousel" class="carousel slide" data-ride="carousel">
+        <!-- Indicators -->
+        <ol class="carousel-indicators">
+          <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+          <li data-target="#myCarousel" data-slide-to="1"></li>
+          <li data-target="#myCarousel" data-slide-to="2"></li>
+          <li data-target="#myCarousel" data-slide-to="3"></li>
+        </ol>
 
-    </div>
-
-    <!-- Left and right controls -->
-    <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
-      <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-      <span class="sr-only">Previous</span>
-    </a>
-    <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
-      <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-      <span class="sr-only">Next</span>
-    </a>
-</div>
-
-
-<div class="container" style="width:70%">
-<h1>SUGGESTIONS</h1>
-<center>
-<div class="row">
-  <div class="col-sm-3" style="border: 1px">
-    <img src="{% static "images/teja.jpg" %}" height="100px">
-  </div>
-  <div class="col-sm-3" style="border: 1px">
-    <img src="{% static "images/teja.jpg" %}" height="100px">
-  </div>
-  <div class="col-sm-3" style="border: 1px">
-    <img src="{% static "images/teja.jpg" %}" height="100px">
-  </div>
-  <div class="col-sm-3" style="border: 1px">
-    <img src="{% static "images/teja.jpg" %}" height="100px">
-  </div>
-</div></center>
-</div>
-
-
-<!-- carousel for photos -->
-
-
-<!-- Container (The Band Section) -->
-<div id="band" class="container text-center">
-  <h3>THE BAND</h3>
-  <p><em>We love music!</em></p>
-  <p>We have created a fictional band website. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-  <br>
-  <div class="row">
-    <div class="col-sm-4">
-      <p class="text-center"><strong>Saiteja Nangunoori</strong></p><br>
-      <a href="#demo" data-toggle="collapse">
-        <img src="{% static "images/profile.jpg" %}" class="img-circle person" alt="Random Name" width="255" height="255">
-      </a>
-      <div id="demo" class="collapse">
-       
-        <p>160050089</p>
-      </div>
-    </div>
-    <div class="col-sm-4">
-      <p class="text-center"><strong>Sathvik Kollu</strong></p><br>
-      <a href="#demo2" data-toggle="collapse">
-        <img src="{% static "images/sathvik.jpg" %}" class="img-circle person" alt="Random Name" width="255" height="255">
-      </a>
-      <div id="demo2" class="collapse">
-        
-        <p>160050077</p>
-      </div>
-    </div>
-    <div class="col-sm-4">
-      <p class="text-center"><strong>Saiteja Talluri</strong></p><br>
-      <a href="#demo3" data-toggle="collapse">
-        <img src="{% static "images/teja.jpg" %}" class="img-circle person" alt="Random Name" width="255" height="255">
-      </a>
-      <div id="demo3" class="collapse">
-        
-        <p>160050098</p>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- Container (books slider Section) -->
-
-<div id="myarousel" class="carousel slide" data-ride="carousel" style="height: 200px">
-    <!-- Indicators -->
-    <ol class="carousel-indicators">
-      <li data-target="#myarousel" data-slide-to="0" class="active"></li>
-      <li data-target="#myarousel" data-slide-to="1" ></li>
-    </ol>
-
-    <!-- Wrapper for slides -->
-    <div class="carousel-inner" role="listbox">
-      <div class="item active crop" >
-        <img src="{% static "images/Secrets-of-Nagas.jpg" %}" alt="New York" >
-        <div class="carousel-caption">
-          <h3>New York</h3>
-          <p>The atmosphere in New York is lorem ipsum.</p>
-        </div>      
-      </div>
-
-      <div class="item crop" >
-        <div class="item">
-<div class =" row">
-  <div class="col-sm-2" style="border: 1px">
-    <div class="col-item">
-    <div class="photo">
-    <img src="{% static "images/teja.jpg" %}" >
-  </div></div></div>
-  <div class="col-sm-2" style="border: 1px">
-    <div class="col-item">
-    <div class="photo">
-    <img src="{% static "images/teja.jpg" %}" >
-  </div></div></div>
-  <div class="col-sm-2" style="border: 1px">
-   <div class="col-item">
-   <div class="photo">
-    <img src="{% static "images/teja.jpg" %}"  >
-  </div></div></div>
-  <div class="col-sm-2" style="border: 1px">
-    <div class="col-item">
-    <div class="photo">
-    <img src="{% static "images/teja.jpg" %}" >
-  </div></div></div>
-<div class="col-sm-2" style="border: 1px">
-    <div class="col-item">
-    <div class="photo">
-    <img src="{% static "images/teja.jpg" %}" >
-  </div></div></div>
-<div class="col-sm-2" style="border: 1px">
-    <div class="col-item">
-    <div class="photo">
-    <img src="{% static "images/teja.jpg" %}" >
-  </div></div></div>
-
-  </div>
-</div>
-      
-      </div>
-    
-
-    </div>
-
-    <!-- Left and right controls -->
-    <a class="left carousel-control" href="#myarousel" role="button" data-slide="prev">
-      <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-      <span class="sr-only">Previous</span>
-    </a>
-    <a class="right carousel-control" href="#myarousel" role="button" data-slide="next">
-      <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-      <span class="sr-only">Next</span>
-    </a>
-</div>
-
-
-<!-- Container (TOUR Section) -->
-<div id="tour" class="bg-1">
-  <div class="container">
-    <h3 class="text-center">TOUR DATES</h3>
-    <p class="text-center">Lorem ipsum we'll play you some music.<br> Remember to book your tickets!</p>
-    <ul class="list-group">
-      <li class="list-group-item">September <span class="label label-danger">Sold Out!</span></li>
-      <li class="list-group-item">October <span class="label label-danger">Sold Out!</span></li> 
-      <li class="list-group-item">November <span class="badge">3</span></li> 
-    </ul>
-    
-    <div class="row text-center">
-      <div class="col-sm-4">
-        <div class="thumbnail">
-          <img src="{% static "images/paris.jpg" %}" alt="Paris" width="400" height="300">
-          <p><strong>Paris</strong></p>
-          <p>Friday 27 November 2015</p>
-          <button class="btn" data-toggle="modal" data-target="#myModal">Buy Tickets</button>
-        </div>
-      </div>
-      <div class="col-sm-4">
-        <div class="thumbnail">
-          <img src="{% static "images/newyork.jpg" %}" alt="New York" width="400" height="300">
-          <p><strong>New York</strong></p>
-          <p>Saturday 28 November 2015</p>
-          <button class="btn" data-toggle="modal" data-target="#myModal">Buy Tickets</button>
-        </div>
-      </div>
-      <div class="col-sm-4">
-        <div class="thumbnail">
-          <img src="{% static "images/sanfan.jpg" %}" alt="San Francisco" width="400" height="300">
-          <p><strong>San Francisco</strong></p>
-          <p>Sunday 29 November 2015</p>
-          <button class="btn" data-toggle="modal" data-target="#myModal">Buy Tickets</button>
-        </div>
-      </div>
-    </div>
-  </div>
-  
-  <!-- Modal -->
-  <div class="modal fade" id="myModal" role="dialog">
-    <div class="modal-dialog">
-    
-      <!-- Modal content-->
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal">×</button>
-          <h4><span class="glyphicon glyphicon-lock"></span> Tickets</h4>
-        </div>
-        <div class="modal-body">
-          <form role="form">
-            <div class="form-group">
-              <label for="psw"><span class="glyphicon glyphicon-shopping-cart"></span> Tickets, $23 per person</label>
-              <input type="number" class="form-control" id="psw" placeholder="How many?">
+        <!-- Wrapper for slides -->
+      <div id="carouselHome" class="carousel slide carousel-fade">
+          <div class="carousel-inner" role="listbox">
+            <div class="item active">
+              <img src="{% static "images/image1.jpg" %}" width="1200">     
             </div>
-            <div class="form-group">
-              <label for="usrname"><span class="glyphicon glyphicon-user"></span> Send To</label>
-              <input type="text" class="form-control" id="usrname" placeholder="Enter email">
+
+            <div class="item">
+              <img src="{% static "images/image2.jpg" %}" width="1200">
             </div>
-              <button type="submit" class="btn btn-block">Pay 
-                <span class="glyphicon glyphicon-ok"></span>
-              </button>
-          </form>
-        </div>
-        <div class="modal-footer">
-          <button type="submit" class="btn btn-danger btn-default pull-left" data-dismiss="modal">
-            <span class="glyphicon glyphicon-remove"></span> Cancel
-          </button>
-          <p>Need <a href="#">help?</a></p>
+          
+            <div class="item">
+              <img src="{% static "images/image3.jpg" %}" width="1200">    
+          </div>
+
+          <div class="item">
+              <img src="{% static "images/image4.jpg" %}" width="1200">    
+          </div>
+
+          <!-- Left and right controls -->
+          <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+            <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+          </a>
+          <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+            <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+          </a>
         </div>
       </div>
     </div>
+    <!--
+    <div class="container" style="margin-top: 150px">
+        <div class="row">
+            <div class="row">
+                <div class="col-md-9">
+                    <h3>
+                        Most Frequently Read Books</h3>
+                </div>
+                <div class="col-md-3">
+                    <div class="controls pull-right hidden-xs">
+                        <a class="left fa fa-chevron-left btn btn-success" href="#carousel-example" data-slide="prev"></a><a class="right fa fa-chevron-right btn btn-success" href="#carousel-example" data-slide="next"></a>
+                    </div>
+                </div>
+            </div>
+            <div id="carousel-example" class="carousel slide hidden-xs" data-ride="carousel">
+                <div class="carousel-inner">
+                    <div class="item">
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <div class="col-item">
+                                    <div class="photo">
+                                        <img src="http://placehold.it/350x260" class="img-responsive" alt="a">
+                                    </div>
+                                    <div class="info">
+                                        <div class="row">
+                                            <div class="price col-md-6">
+                                                <h5>
+                                                    Sample Product</h5>
+                                                <h5 class="price-text-color">
+                                                    $199.99</h5>
+                                            </div>
+                                            <div class="rating hidden-sm col-md-6">
+                                                <i class="price-text-color fa fa-star"></i><i class="price-text-color fa fa-star">
+                                                </i><i class="price-text-color fa fa-star"></i><i class="price-text-color fa fa-star">
+                                                </i><i class="fa fa-star"></i>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="clearfix">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <div class="col-item">
+                                    <div class="photo">
+                                        <img src="http://placehold.it/350x260" class="img-responsive" alt="a">
+                                    </div>
+                                    <div class="info">
+                                        <div class="row">
+                                            <div class="price col-md-6">
+                                                <h5>
+                                                    Product Example</h5>
+                                                <h5 class="price-text-color">
+                                                    $249.99</h5>
+                                            </div>
+                                            <div class="rating hidden-sm col-md-6">
+                                            </div>
+                                        </div>
+                                       
+                                        <div class="clearfix">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <div class="col-item">
+                                    <div class="photo">
+                                        <img src="http://placehold.it/350x260" class="img-responsive" alt="a">
+                                    </div>
+                                    <div class="info">
+                                        <div class="row">
+                                            <div class="price col-md-6">
+                                                <h5>
+                                                    Next Sample Product</h5>
+                                                <h5 class="price-text-color">
+                                                    $149.99</h5>
+                                            </div>
+                                            <div class="rating hidden-sm col-md-6">
+                                                <i class="price-text-color fa fa-star"></i><i class="price-text-color fa fa-star">
+                                                </i><i class="price-text-color fa fa-star"></i><i class="price-text-color fa fa-star">
+                                                </i><i class="fa fa-star"></i>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="clearfix">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <div class="col-item">
+                                    <div class="photo">
+                                        <img src="http://placehold.it/350x260" class="img-responsive" alt="a">
+                                    </div>
+                                    <div class="info">
+                                        <div class="row">
+                                            <div class="price col-md-6">
+                                                <h5>
+                                                    Sample Product</h5>
+                                                <h5 class="price-text-color">
+                                                    $199.99</h5>
+                                            </div>
+                                            <div class="rating hidden-sm col-md-6">
+                                                <i class="price-text-color fa fa-star"></i><i class="price-text-color fa fa-star">
+                                                </i><i class="price-text-color fa fa-star"></i><i class="price-text-color fa fa-star">
+                                                </i><i class="fa fa-star"></i>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="clearfix">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="item active">
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <div class="col-item">
+                                    <div class="photo">
+                                        <img src="http://placehold.it/350x260" class="img-responsive" alt="a">
+                                    </div>
+                                    <div class="info">
+                                        <div class="row">
+                                            <div class="price col-md-6">
+                                                <h5>
+                                                    Product with Variants</h5>
+                                                <h5 class="price-text-color">
+                                                    $199.99</h5>
+                                            </div>
+                                            <div class="rating hidden-sm col-md-6">
+                                                <i class="price-text-color fa fa-star"></i><i class="price-text-color fa fa-star">
+                                                </i><i class="price-text-color fa fa-star"></i><i class="price-text-color fa fa-star">
+                                                </i><i class="fa fa-star"></i>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="clearfix">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <div class="col-item">
+                                    <div class="photo">
+                                        <img src="http://placehold.it/350x260" class="img-responsive" alt="a">
+                                    </div>
+                                    <div class="info">
+                                        <div class="row">
+                                            <div class="price col-md-6">
+                                                <h5>
+                                                    Grouped Product</h5>
+                                                <h5 class="price-text-color">
+                                                    $249.99</h5>
+                                            </div>
+                                            <div class="rating hidden-sm col-md-6">
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="clearfix">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <div class="col-item">
+                                    <div class="photo">
+                                        <img src="http://placehold.it/350x260" class="img-responsive" alt="a">
+                                    </div>
+                                    <div class="info">
+                                        <div class="row">
+                                            <div class="price col-md-6">
+                                                <h5>
+                                                    Product with Variants</h5>
+                                                <h5 class="price-text-color">
+                                                    $149.99</h5>
+                                            </div>
+                                            <div class="rating hidden-sm col-md-6">
+                                                <i class="price-text-color fa fa-star"></i><i class="price-text-color fa fa-star">
+                                                </i><i class="price-text-color fa fa-star"></i><i class="price-text-color fa fa-star">
+                                                </i><i class="fa fa-star"></i>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="clearfix">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <div class="col-item">
+                                    <div class="photo">
+                                        <img src="http://placehold.it/350x260" class="img-responsive" alt="a">
+                                    </div>
+                                    <div class="info">
+                                        <div class="row">
+                                            <div class="price col-md-6">
+                                                <h5>
+                                                    Product with Variants</h5>
+                                                <h5 class="price-text-color">
+                                                    $199.99</h5>
+                                            </div>
+                                            <div class="rating hidden-sm col-md-6">
+                                                <i class="price-text-color fa fa-star"></i><i class="price-text-color fa fa-star">
+                                                </i><i class="price-text-color fa fa-star"></i><i class="price-text-color fa fa-star">
+                                                </i><i class="fa fa-star"></i>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="clearfix">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row" style="margin-top: -250px;margin-bottom: 0px">
+            <div class="row">
+                <div class="col-md-9">
+                    <h3>
+                        Latest Books Online</h3>
+                </div>
+                <div class="col-md-3">
+                    <div class="controls pull-right hidden-xs">
+                        <a class="left fa fa-chevron-left btn btn-primary" href="#carousel-example-generic" data-slide="prev"></a><a class="right fa fa-chevron-right btn btn-primary" href="#carousel-example-generic" data-slide="next"></a>
+                    </div>
+                </div>
+            </div>
+            <div id="carousel-example-generic" class="carousel slide hidden-xs" data-ride="carousel">
+                <div class="carousel-inner">
+                    <div class="item">
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <div class="col-item">
+                                    <div class="photo">
+                                        <img src="http://placehold.it/350x260" class="img-responsive" alt="a">
+                                    </div>
+                                    <div class="info">
+                                        <div class="row">
+                                            <div class="price col-md-6">
+                                                <h5>
+                                                    Sample Product</h5>
+                                                <h5 class="price-text-color">
+                                                    $199.99</h5>
+                                            </div>
+                                            <div class="rating hidden-sm col-md-6">
+                                                <i class="price-text-color fa fa-star"></i><i class="price-text-color fa fa-star">
+                                                </i><i class="price-text-color fa fa-star"></i><i class="price-text-color fa fa-star">
+                                                </i><i class="fa fa-star"></i>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="clearfix">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="col-item">
+                                    <div class="photo">
+                                        <img src="http://placehold.it/350x260" class="img-responsive" alt="a">
+                                    </div>
+                                    <div class="info">
+                                        <div class="row">
+                                            <div class="price col-md-6">
+                                                <h5>
+                                                    Product Example</h5>
+                                                <h5 class="price-text-color">
+                                                    $249.99</h5>
+                                            </div>
+                                            <div class="rating hidden-sm col-md-6">
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="clearfix">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="col-item">
+                                    <div class="photo">
+                                        <img src="http://placehold.it/350x260" class="img-responsive" alt="a">
+                                    </div>
+                                    <div class="info">
+                                        <div class="row">
+                                            <div class="price col-md-6">
+                                                <h5>
+                                                    Next Sample Product</h5>
+                                                <h5 class="price-text-color">
+                                                    $149.99</h5>
+                                            </div>
+                                            <div class="rating hidden-sm col-md-6">
+                                                <i class="price-text-color fa fa-star"></i><i class="price-text-color fa fa-star">
+                                                </i><i class="price-text-color fa fa-star"></i><i class="price-text-color fa fa-star">
+                                                </i><i class="fa fa-star"></i>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="clearfix">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="item active">
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <div class="col-item">
+                                    <div class="photo">
+                                        <img src="http://placehold.it/350x260" class="img-responsive" alt="a">
+                                    </div>
+                                    <div class="info">
+                                        <div class="row">
+                                            <div class="price col-md-6">
+                                                <h5>
+                                                    Product with Variants</h5>
+                                                <h5 class="price-text-color">
+                                                    $199.99</h5>
+                                            </div>
+                                            <div class="rating hidden-sm col-md-6">
+                                                <i class="price-text-color fa fa-star"></i><i class="price-text-color fa fa-star">
+                                                </i><i class="price-text-color fa fa-star"></i><i class="price-text-color fa fa-star">
+                                                </i><i class="fa fa-star"></i>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="clearfix">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="col-item">
+                                    <div class="photo">
+                                        <img src="http://placehold.it/350x260" class="img-responsive" alt="a">
+                                    </div>
+                                    <div class="info">
+                                        <div class="row">
+                                            <div class="price col-md-6">
+                                                <h5>
+                                                    Grouped Product</h5>
+                                                <h5 class="price-text-color">
+                                                    $249.99</h5>
+                                            </div>
+                                            <div class="rating hidden-sm col-md-6">
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="clearfix">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="col-item">
+                                    <div class="photo">
+                                        <img src="http://placehold.it/350x260" class="img-responsive" alt="a">
+                                    </div>
+                                    <div class="info">
+                                        <div class="row">
+                                            <div class="price col-md-6">
+                                                <h5>
+                                                    Product with Variants</h5>
+                                                <h5 class="price-text-color">
+                                                    $149.99</h5>
+                                            </div>
+                                            <div class="rating hidden-sm col-md-6">
+                                                <i class="price-text-color fa fa-star"></i><i class="price-text-color fa fa-star">
+                                                </i><i class="price-text-color fa fa-star"></i><i class="price-text-color fa fa-star">
+                                                </i><i class="fa fa-star"></i>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="clearfix">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>-->
   </div>
 </div>
-
-<!-- Container (Contact Section) -->
-<div id="contact" class="container">
-  <h3 class="text-center">Contact</h3>
-  <p class="text-center"><em>We love our fans!</em></p>
-
-  <div class="row">
-    <div class="col-md-4">
-      <p>Fan? Drop a note.</p>
-      <p><span class="glyphicon glyphicon-map-marker"></span>Chicago, US</p>
-      <p><span class="glyphicon glyphicon-phone"></span>Phone: +00 1515151515</p>
-      <p><span class="glyphicon glyphicon-envelope"></span>Email: mail@mail.com</p>
-    </div>
-    <div class="col-md-8">
-      <div class="row">
-        <div class="col-sm-6 form-group">
-          <input class="form-control" id="name" name="name" placeholder="Name" type="text" required>
-        </div>
-        <div class="col-sm-6 form-group">
-          <input class="form-control" id="email" name="email" placeholder="Email" type="email" required>
-        </div>
-      </div>
-      <textarea class="form-control" id="comments" name="comments" placeholder="Comment" rows="5"></textarea>
-      <br>
-      <div class="row">
-        <div class="col-md-12 form-group">
-          <button class="btn pull-right" type="submit">Send</button>
-        </div>
-      </div>
-    </div>
-  </div>
-  <br>
-  <h3 class="text-center">From The Blog</h3>  
-  <ul class="nav nav-tabs">
-    <li class="active"><a data-toggle="tab" href="#home">Mike</a></li>
-    <li><a data-toggle="tab" href="#menu1">Chandler</a></li>
-    <li><a data-toggle="tab" href="#menu2">Peter</a></li>
-  </ul>
-
-  <div class="tab-content">
-    <div id="home" class="tab-pane fade in active">
-      <h2>Mike Ross, Manager</h2>
-      <p>Man, we've been on the road for some time now. Looking forward to lorem ipsum.</p>
-    </div>
-    <div id="menu1" class="tab-pane fade">
-      <h2>Chandler Bing, Guitarist</h2>
-      <p>Always a pleasure people! Hope you enjoyed it as much as I did. Could I BE.. any more pleased?</p>
-    </div>
-    <div id="menu2" class="tab-pane fade">
-      <h2>Peter Griffin, Bass player</h2>
-      <p>I mean, sometimes I enjoy the show, but other times I enjoy other things.</p>
-    </div>
-  </div>
-</div>
-
-<!-- Add Google Maps -->
-<div id="googleMap"></div>
-<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3769.3706108026936!2d72.90735631423145!3d19.13524788705388!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be7b807ebe0ff9d%3A0xb17de101f86315a1!2sHostel+5%2C+Students&#39;+Residential+Zone%2C+IIT+Area%2C+Powai%2C+Mumbai%2C+Maharashtra+400076!5e0!3m2!1sen!2sin!4v1500726006765" width="100%" height="500" frameborder="0" style="border:0" allowfullscreen></iframe>
-
-      <footer class="footer" style="font-size: 25px" >
-      <p class="text-center">Follow us on </p>
-        <div class="container-fluid text-center" style="height: 10%">
-          <a href="#"><i class="fa fa-facebook"></i></a>
-          <a href="#"><i class="fa fa-twitter"></i></a>
-          <a href="#"><i class="fa fa-linkedin"></i></a>
-          <a href="#"><i class="fa fa-google-plus"></i></a>
-          <a href="#"><i class="fa fa-skype"></i></a><br><br>
-          <a class="up-arrow" href="#" data-toggle="tooltip" title="TO TOP"><span class="glyphicon glyphicon-chevron-up"></span></a>
-       </div>
-      </footer>
-
-
-
-<script>
-$(document).ready(function(){
-  // Initialize Tooltip
-  $('[data-toggle="tooltip"]').tooltip(); 
-  
-  // Add smooth scrolling to all links in navbar + footer link
-  $(".navbar a, footer a[href='#myPage']").on('click', function(event) {
-
-    // Make sure this.hash has a value before overriding default behavior
-    if (this.hash !== "") {
-
-      // Prevent default anchor click behavior
-      event.preventDefault();
-
-      // Store hash
-      var hash = this.hash;
-
-      // Using jQuery's animate() method to add smooth page scroll
-      // The optional number (900) specifies the number of milliseconds it takes to scroll to the specified area
-      $('html, body').animate({
-        scrollTop: $(hash).offset().top
-      }, 900, function(){
-   
-        // Add hash (#) to URL when done scrolling (default click behavior)
-        window.location.hash = hash;
-      });
-    } // End if
-  });
-})
-</script>
-
 </body>
 </html>
+

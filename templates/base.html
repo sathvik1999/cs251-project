@@ -12,21 +12,23 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="{% static "css/style.css" %}" type="text/css" media="screen" />
-    <link href="{% static "css/bootstrap1.css" %}" rel="stylesheet" type="text/css" media="all">
-    <link href="{% static "css/style1.css" %}" rel="stylesheet" type="text/css" media="all">
-    <script src="{% static "js/jquery1.min.js" %}" type="text/javascript"></script>
-    <script src="{% static "js/bootstrap1.min.js" %}" type="text/javascript"></script>
-    <script src="{% static "js/handlebars1-v1.3.0.js" %}" type="text/javascript"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/magnific-popup.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/magnific-popup.css">
     <script src="{% static "js/jquery-1.12.2.min.js" %}" type="text/javascript"></script>
     <script src="{% static "channels/js/websocketbridge.js" %}" type="text/javascript"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,300,600,400italic,700'rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/jquery.magnific-popup.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/waypoints/4.0.1/jquery.waypoints.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/stellar.js/0.6.2/jquery.stellar.min.js"></script>
     <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Poiret+One" rel="stylesheet"> 
     <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Pacifico" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" type="text/css">
     <style>
       body {
@@ -34,6 +36,7 @@
     overflow-x: hidden;
     font: 400 15px/1.8 Lato, sans-serif;
       color: #777;
+      {% block colr %}{% endblock %}
 }
 /*body {
       font: 400 15px/1.8 Lato, sans-serif;
@@ -47,15 +50,22 @@
     border: 1px solid #ccc;
     box-sizing: border-box;
 }
+.js .to-animate,
+.js .to-animate-2,
+.js .single-animate {
+  opacity: 0;
+}
+
 body,
 html { height: 100%;}
 .nav .open > a, 
 .nav .open > a:hover, 
 .nav .open > a:focus {background-color: transparent;}
 
-#myext {
-  
+.container {
+      padding: 80px 120px;
 }
+
  #menu ul{
   list-style: none;
 }
@@ -341,65 +351,20 @@ html { height: 100%;}
     z-index: 1;
 }
 
-/* -------------------------------- Start of Carousel styling --------------------------- */
-  .carousel {
-    padding-top: 23.8px;
-    margin-top: 0px;
-  }
-  .carousel .item {
-    height: 610px;
-  }
-  .carousel-inner img {
-      width: 100%;
-      margin: auto;
-  }
-  .carousel-caption h3 {
-      color: #fff !important;
-  }
-.carousel-fade .carousel-inner .item {
-  opacity: 0;
-  -webkit-transition-property: opacity;
-  -moz-transition-property: opacity;
-  -o-transition-property: opacity;
-  transition-property: opacity;
-}
-  .carousel-fade .carousel-inner .active {
-    opacity: 1 !important;
-  }
-  .carousel-fade .carousel-inner .active.left,
-  .carousel-fade .carousel-inner .active.right {
-    left: 0;
-    opacity: 0;
-    z-index: 1;
-  }
-  .carousel-fade .carousel-inner .next.left,
-  .carousel-fade .carousel-inner .prev.right {
-    opacity: 1;
-  }
-  .carousel-fade .carousel-control {
-    z-index: 2;
-  }
-
-  @media(max-width: 600px) {
-    .carousel-caption {
-      display: none; 
-    }
-  }
-
-/* -----------------------------------  End of Carousel styling  ------------------------------------------ */
 
 /* -----------------------------------  Start of Navbar top styling  ------------------------------------------ */
-.header{
+.header1{
   margin-top: 0px;
+  margin-bottom: -5px;
   /*z-index:1;*/
-  height: 110%;
+  height: 90%;
   width:100%;
   top: 0;
   bottom:10px;
-  padding-bottom: 10px;
+  padding-bottom: 0px;
   font-family: Montserrat, sans-serif;
   border: 0;
-  font-size: 11px !important;
+  font-size: 12px !important;
   letter-spacing: 4px;
   opacity: 1;
   /*position:absolute;*/
@@ -409,7 +374,7 @@ html { height: 100%;}
     margin: 0;
     padding: 0;
     overflow: hidden;
-    background-color: #f7f4f4;
+    background-color:#e6e6ff;
 }
 
 .header1 li {
@@ -420,24 +385,25 @@ html { height: 100%;}
     display: inline-block;
     color: black !important;
     text-align: center;
-    padding: 14px 16px;
+    padding: 12px 16px;
     margin-right: 20px;
     text-decoration: none;
 }
 
 .header1-brand{
   padding-left: 10px;
-  padding-right: 300px;
+  padding-right:35%;
+  font-family: Montserrat, sans-serif;
   font-size: 14px !important;
   text-align: center;
 }
 
 .header1 li a:hover {
-    color: orange !important;
+    color: #ff6600 !important;
 }
 
 .header1 li.active a {
-    color: orange !important;
+    color: #ff6600 !important;
     background-color: #29292c !important;
 }
 
@@ -513,10 +479,6 @@ html { height: 100%;}
     border-top: 1px solid #E1E1E1;
 }
 
-.clear-left
-{
-    clear: left;
-}
 
 .col-item .separator p
 {
@@ -528,7 +490,7 @@ html { height: 100%;}
 
 .col-item .separator p i
 {
-    margin-right: 5px;
+    margin-right: 0px;
 }
 .col-item .btn-add
 {
@@ -581,10 +543,84 @@ html { height: 100%;}
       letter-spacing: 4px;
       opacity: 0.9;
 }
+a.button{
+ background-color:#cc0000;
+ border:1px solid #660000;
+ border-radius:5px;
+ color:#fff;
+ margin-right:10px;
+ padding:5px 5px 5px 5px;
+ text-decoration: none;
+}
+
 
 /* ------------------------------------ End of Book Carousel Styling ---------------------------------------*/
 
-    </style>
+#top-home {
+  background-image: url('{% static "images/bg_image1.jpg" %}');
+  background-color: transparent;
+  background-size: cover;
+  background-attachment: fixed;
+  position: relative;
+  width: 100%;
+  background-color: #52d3aa;
+  color: #fff;
+  overflow: hidden;
+}
+#top-home .gradient {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 2;
+  opacity: .65;
+  -webkit-backface-visibility: hidden;
+  background-color: #52d3aa;
+  background-image: -webkit-gradient(linear, 0% 0%, 100% 100%, color-stop(0, #3f95ea), color-stop(1, #52d3aa));
+  background-image: -webkit-repeating-linear-gradient(top left, #3f95ea 0%, #52d3aa 100%);
+  background-image: repeating-linear-gradient(to bottom right, #3f95ea 0%, #52d3aa 100%);
+  background-image: -ms-repeating-linear-gradient(top left, #3f95ea 0%, #52d3aa 100%);
+}
+#top-home, #top-home .text-wrap {
+  height: 570px;
+}
+#top-home .text-wrap {
+  display: table;
+  width: 100%;
+  position: relative;
+  z-index: 4;
+}
+#top-home .text-inner {
+  display: table-cell;
+  vertical-align: middle;
+  text-align: center;
+}
+#top-home .text-inner a {
+  color: white;
+  border-bottom: 1px dashed rgba(255, 255, 255, 0.5);
+  -webkit-transition: 0.5s;
+  -o-transition: 0.5s;
+  transition: 0.5s;
+}
+#top-home .text-inner a:hover, #top-home .text-inner a:active, #top-home .text-inner a:focus {
+  text-decoration: none;
+  color: white;
+  border-bottom: 1px dashed white;
+}
+#top-home .text-inner h1 {
+  font-size: 50px;
+  color: white;
+  margin: 0 0 20px 0;
+}
+#top-home .text-inner h2 {
+  font-size: 28px;
+  line-height: 38px;
+  font-weight: 300;
+  color: rgba(255, 255, 255, 0.8);
+  margin: 0;
+}
+</style>
     <script type="text/javascript">
       $(document).ready(function () {
   var trigger = $('.hamburger'),
@@ -609,6 +645,35 @@ html { height: 100%;}
         isClosed = true;
       }
   }
+
+    var homeAnimate = function() {
+    if ( $('#top-home').length > 0 ) {  
+
+      $('#top-home').waypoint( function( direction ) {
+                    
+        if( direction === 'down' && !$(this.element).hasClass('animated') ) {
+
+
+          setTimeout(function() {
+            $('#top-home .to-animate').each(function( k ) {
+              var el = $(this);
+              
+              setTimeout ( function () {
+                el.addClass('fadeInUp animated');
+              },  k * 20, 'easeInOutExpo' );
+              
+            });
+          }, 20);
+
+          
+          $(this.element).addClass('animated');
+            
+        }
+      } , { offset: '100%' } );
+
+    }
+  };
+  homeAnimate();
   
   $('[data-toggle="offcanvas"]').click(function () {
         $('#wrapper').toggleClass('toggled');
@@ -633,7 +698,9 @@ html { height: 100%;}
                   <ul class="dropdown-menu" role="menu">
                     <li class="dropdown-header"></li>
                     <li><a href="{% url 'upfile' %}">Upload New Book</a></li>
-                    <li><a href="#youruploads">Your Uploads</a></li>
+                    {%block navbaru-content %}
+                    {% endblock %}
+                    <!--<li><a href="#youruploads">Your Uploads</a></li>-->
                   </ul>
                 </li>
                 <li class="dropdown">
@@ -643,9 +710,9 @@ html { height: 100%;}
                     <!--<li><a href="#">Owned Communities</a></li>-->
                     {%block navbar1-content %}
                     {% endblock %}
-                    <li><a href="#">Joined Communtites</a></li>
-                    <li><a href="#">Other Communities</a></li>
-                    <li><a href="{% url 'community' %}">Create Communtity</a></li>
+                    <li><a href="{% url 'jcommunities' %}">Joined Communtites</a></li>
+                    <li><a href="{% url 'ocommunities' %}">Other Communities</a></li>
+                    <li><a href="{% url 'community' %}"> Create Communtity</a></li>
                   </ul>
                 </li>
                 <li class="dropdown">
@@ -657,15 +724,16 @@ html { height: 100%;}
                   </ul>
                 </li>
                 <li> <a href="{% url 'notes' %}"> NOTIFICATIONS </a> </li>
-                <li> <a href="{% url 'search' %}"> SEARCH </a> </li>
                 <li class="dropdown">
-                  <a href="#" class="dropdown-toggle" data-toggle="dropdown">REQUESTS<span class="caret"></span></a>
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown"> SETTINGS <span class="caret"></span></a>
                   <ul class="dropdown-menu" role="menu">
                     <li class="dropdown-header"></li>
-                    <li><a href="#">Read requests</a></li>
-                    <li><a href="#">Join requests</a></li>
+                    <li><a href="{% url 'interests' %}">Interests</a></li>
+                    <li><a href="{% url 'editprofile' %}">Edit Profile</a></li>
+                    <li><a href="{% url 'reset' %}">Change Password</a></li>
                   </ul>
                 </li>
+                
             </ul>
         </nav>
         <button type="button" class="hamburger is-closed" data-toggle="offcanvas">
@@ -675,12 +743,12 @@ html { height: 100%;}
         </button>
         <div class="header1">
            <ul>
-            <li><a href="#"><span class="glyphicon glyphicon-search"></span></a></li>
+            <li><a href="{% url 'search' %}"><span class="glyphicon glyphicon-search"></span></a></li>
             <li><a href="{% url 'logout' %}">LOG OUT</a></li>
-            <li><a href="{% url 'settings' %}">SETTINGS</a></li>
+            <li><a href="{% url 'notes' %}">NOTIFICATIONS</a></li>
             <li><a href="{% url 'upfile' %}">UPLOAD</a></li>
             <li><a href="http://127.0.0.1:8000/chat">CHATS</a></li>
-            <li class="header-brand"><a href="{% url 'home' %}">BOOK STORE</a></li>
+            <li class="header1-brand"><a href="{% url 'home' %}">BOOK STORE</a></li>
           </ul>
     </div>
     <!--<div id="myCarousel" class="carousel slide" data-ride="carousel">

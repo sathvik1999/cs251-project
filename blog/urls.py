@@ -1,3 +1,5 @@
+## @brief urls for the Blog app.
+
 from django.conf.urls import url
 from django.contrib.auth import views as auth_views
 from django.conf.urls.static import static
@@ -7,7 +9,6 @@ from .forms import SignUpForm,InterestForm,DocumentForm,RatingForm,CommunityForm
 form1=SignUpForm()
 urlpatterns = [
     url(r'^$', entry_views.home, name='home'),
-    url(r'^test/$', entry_views.test, name='test'),
     url(r'^login/$', auth_views.login, {'template_name': 'login.html', 'extra_context': {'form1':form1 ,},},
          name='login'),
     url(r'^logout/$', auth_views.logout, {'next_page': 'login'}, name='logout'),
@@ -20,8 +21,11 @@ urlpatterns = [
     url(r'^login/notes/$', entry_views.notes,name='notes'),
     url(r'^login/advertise/$',	entry_views.advertise,name='advertise'),
     url(r'^login/createcommunity/$',entry_views.community,name='community'),
+    url(r'^login/jcommunities/$',entry_views.jcommunities,name='jcommunities'),
+    url(r'^login/ocommunities/$',entry_views.ocommunities,name='ocommunities'),
     url(r'^login/search/$', entry_views.search, name='search'),
- 	url(r'^login/delete/(?P<pk>\d+)/$', entry_views.delete1, name='delete'),
+ 	url(r'^login/searchad/$', entry_views.searchad, name='searchad'),
+    url(r'^login/delete/(?P<pk>\d+)/$', entry_views.delete1, name='delete'),
  	url(r'^login/deletead/(?P<pk>\d+)/$', entry_views.delete1ad, name='deletead'),
  	url(r'^login/bookpage/(?P<pk>\d+)/$', entry_views.bookpage, name='bookpage'),
  	url(r'^login/adpage/(?P<pk>\d+)/$', entry_views.adpage, name='adpage'),
@@ -37,7 +41,8 @@ urlpatterns = [
  	url(r'^login/srequest/(?P<pk>\w+)/$',entry_views.srequest,name='srequest'),
  	url(r'^login/crequest/(?P<pk>\w+)/$',entry_views.crequest,name='crequest'),
  	url(r'^login/prequest/(?P<pk>\d+)/$',entry_views.prequest,name='prequest'),
- 	url(r'^login/accept/(?P<pk>\d+)/(?P<name>.+)$',entry_views.accept,name='accept'),
+ 	url(r'^login/cprequest/(?P<pk>\d+)/$',entry_views.cprequest,name='cprequest'),
+    url(r'^login/accept/(?P<pk>\d+)/(?P<name>.+)$',entry_views.accept,name='accept'),
  	url(r'^login/acceptread/(?P<pk>\d+)/(?P<pk1>\d+)/$',entry_views.acceptread,name='acceptread'),
  	url(r'^login/upfileinc/(?P<pk>\d+)/$',	entry_views.upfileinc,name='upfileinc'),
     url(r'^login/leave/(?P<pk>\w+)/$',entry_views.leave,name='leave'),

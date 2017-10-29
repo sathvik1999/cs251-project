@@ -44,13 +44,13 @@ INSTALLED_APPS = [
     #'chat',
     #'channels',
     'django.contrib.auth',
-    'debug_toolbar',
+    #'debug_toolbar',
     'django_private_chat',
     'custom_app',
 ]
 
 l = (
-    'debug_toolbar.middleware.DebugToolbarMiddleware',
+    #'debug_toolbar.middleware.DebugToolbarMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -94,7 +94,7 @@ TEMPLATES = [
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
-                'django.template.context_processors.debug',
+                #'django.template.context_processors.debug',
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
@@ -163,7 +163,7 @@ LOGIN_REDIRECT_URL = 'home'
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
-LOGGING = {
+'''LOGGING = {
     'version': 1,
     'disable_existing_loggers': True,
     'formatters': {
@@ -208,7 +208,7 @@ LOGGING = {
         }
     }
 }
-
+'''
 INTERNAL_IPS = ['127.0.0.1', 'localhost']
 SESSION_COOKIE_AGE = 12096000
 

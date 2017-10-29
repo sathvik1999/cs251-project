@@ -1,12 +1,13 @@
 {# This template is here just to demonstrate how to customize the default one. #}
 {# It has none to very few changes #}
-{% extends "base.html" %}
+{% extends "chatbase.html" %}
 {% load static %}
 {% load i18n %}
 {% block css %}
 {% endblock css %}
 
 {% block content %}
+    <br><br>
     <input id="owner_username" type="hidden" value="{{ request.user.username }}">
     <div class="container">
         <div class="col-md-3">
@@ -16,6 +17,7 @@
                 </div>
                 <div class="panel-body">
                     <div class="user-list-div">
+                    <br>
                         <ul style="list-style-type: none;">
                             {% for dialog in object_list %}
                                 <li>
@@ -31,6 +33,7 @@
                                         {% endwith %}
                                     {% endif %}
                                 </li>
+                                <br>
                             {% endfor %}
                         </ul>
                     </div>
@@ -45,9 +48,9 @@
                         <strong>{{ opponent_username }} {% trans "is typing..." %}</strong>
                     </span>
                     </div>
-                    <p>
-                        {{ opponent_username }}
-                    </p>
+                    <h3>
+                        chat with {{ opponent_username }}
+                    </h3>
                     <p class="text-success" id="online-status" style="display: none">{% trans "Online" %}</p>
                     <p class="text-danger" id="offline-status" style="display: none">{% trans "Offline" %}</p>
 
@@ -57,9 +60,9 @@
                                 <div class="row  {% if msg.read %}msg-read{% else %}msg-unread{% endif %} {% if msg.sender != request.user %}opponent{% endif %}"
                                      data-id="{{ msg.id }}">
                                     <p class="{% if msg.sender == request.user %}pull-left{% else %}pull-right{% endif %}">
-                                        <span class="username">{{ msg.sender.username }}:</span>
+                                        <span class="username">{{ msg.sender.username }}:<span class="timestamp" style="color: red">&nbsp;</span></span>
                                         {{ msg.text }}
-                                        <span class="timestamp">&ndash; <span
+                                        <span class="timestamp" style="color: red">&nbsp;<span class="timestamp" style="color: red">&nbsp;<span class="timestamp" style="color: red">&ndash; <span
                                                 data-livestamp="{{ msg.get_formatted_create_datetime }}">{{ msg.get_formatted_create_datetime }}</span></span>
                                     </p>
                                 </div>
